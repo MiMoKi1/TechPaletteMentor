@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="favicon.ico"> <!-- Favicon -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet"> <!-- Font -->
+    <title>Tech Palette Mentor</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #FFFFFF;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        /* Header styles */
+        #header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        #logo {
+            width: 100px;
+        }
+
+        h1 {
+            color: #888;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        /* Section styles */
+        section {
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        /* Flex container for content and video */
+        #content-video {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start; /* Align items to the top */
+        }
+
+        #content {
+            width: 55%; /* Adjust width as needed */
+            margin-right: 20px; /* Space between content and video */
+        }
+
+        #video {
+            width: 40%; /* Adjust width as needed */
+            text-align: center;
+        }
+
+        video {
+            width: 100%; /* Full width for video */
+            height: auto;
+        }
+
+        /* Purchase button styles */
+        form {
+            text-align: center;
+        }
+
+        button {
+            background-color: #8B5B29;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #a86535;
+        }
+
+        /* Footer styles */
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #f8f8f8;
+        }
+
+        footer a {
+            color: #333;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 14px;
+            transition: color 0.3s ease, font-weight 0.3s ease;
+        }
+
+        footer a:hover {
+            font-weight: bold;
+        }
+
+        /* Menu styles */
+        #menu-icon {
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+
+        #menu-icon:hover {
+            transform: scale(1.1);
+            filter: brightness(1.2);
+        }
+
+        .dropdown {
+            position: absolute;
+            top: 60px;
+            right: 10px;
+            background-color: #FAF2E2;
+            border: 1px solid #8B5B29;
+            border-radius: 5px;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s, opacity 0.3s ease;
+            flex-direction: column;
+            width: 160px;
+            padding: 5px;
+        }
+
+        .dropdown a {
+            text-decoration: none;
+            color: #8B5B29;
+            padding: 10px;
+            display: block;
+            transition: background-color 0.3s ease, font-weight 0.3s ease;
+        }
+
+        .dropdown a:hover {
+            background-color: #8B5B29;
+            color: white;
+            font-weight: bold;
+        }
+
+        .dropdown.active {
+            visibility: visible;
+            opacity: 1; /* Change opacity to make it visible */
+        }
+/* Purchase button styles */
+form {
+    text-align: center;
+}
+
+button {
+    background-color: #FF6F61; /* Cute pink color */
+    color: white;
+    border: none;
+    border-radius: 12px; /* Rounded corners */
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    position: relative;
+    overflow: hidden; /* To contain the pseudo-element */
+    transition: transform 0.3s;
+}
+
+button::before {
+    content: '❤️'; /* Heart symbol */
+    position: absolute;
+    left: 84px; /* Adjusted left position */
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px; /* Heart size */
+    opacity: 0.7; /* Slightly transparent */
+}
+
+button:hover {
+    background-color: #FF4C4C; /* Darker pink on hover */
+    transform: scale(1.05); /* Slight scale on hover */
+}
+
+
+    </style>
+</head>
+<body>
+
+<!-- Header with logo and menu icon -->
+<div id="header">
+    <a href="index.html">
+        <img id="logo" src="palettementor100x100transp.png" alt="Tech Palette Mentor Logo">
+    </a>
+    <img id="menu-icon" src="menu.png" alt="Menu Icon">
+</div>
+
+<!-- Dropdown Menu -->
+<div class="dropdown">
+    <a href="index.html">Home</a>
+    <a href="AboutUs.html">About Us</a>
+    <a href="HowToUse.html">How to Use</a>
+    <a href="buynow.html">Buy</a>
+    <a href="App.html">Web App</a>
+    <a href="ContactUs.html">Contact Us</a>
+</div>
+
+<header>
+    <h1>Welcome to Tech Palette Mentor</h1>
+</header>
+
+
+<h2> About us </h2>
+At Tech Palette Mentor, we are passionate about bridging the gap between traditional art practices and modern technology. Our team of artists and tech enthusiasts has come together to create an innovative web app designed specifically for artists of all levels. With Tech Palette Mentor, we aim to empower creators by providing personalised colour blending suggestions based on their actual paint inventory. Our mission is to inspire creativity, enhance artistic expression, and help artists explore the endless possibilities of colour theory. Join us on this exciting journey to elevate your artistry! Learn more <a href="AboutUs.html">about us</a> 
+<section id="purchase">
+    <h2>Get Access</h2>
+    <p>Unlock the full potential of Tech Palette Mentor by purchasing access to our exclusive features.</p>
+    <form action="your_stripe_link_here" method="POST">
+        <button type="submit">Buy Now</button>
+    </form>
+</section>
+
+
+
+</section>
+
+<section id="content-video">
+    <div id="content">
+        <h2>How to Use</h2>
+        <p>1. Upload your images</P>
+ 	<p>2. Input your paint inventory</P>
+	<p>3. Get blending suggestions instantly!</P>
+
+<p>Learn how different colors interact and recreate images using your real-life paints.</p> 
+    </div>
+    <div id="video">
+        <h2>Watch the Demo</h2>
+        <video controls>
+            <source src="HowToUseTechPaletteMentor.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+</section>
+
+<section id="purchase">
+        <form action="your_stripe_link_here" method="POST">
+        <button type="submit">Buy Now</button>
+    </form>
+</section>
+
+
+<!-- Footer -->
+<footer>
+    <p>&copy; 2024 Tech Palette Mentor. All rights reserved.</p>
+    <p>
+        <a href="TermsandConditions.html">T&C</a> |
+        <a href="PrivacyPolicy.html">Privacy Policy</a> |
+        <a href="ContactUs.html">Contact Us</a> |
+        <a href="index.html">Back to Home</a> |
+        <a href="BuyNow.html">Buy</a> |
+        <a href="app.html">Web App</a>
+    </p>
+    <p>
+        <a href="https://www.instagram.com/techpalettementor"><img src="instagram.png" alt="Instagram" style="width:14px;height:14px;"></a>
+        <a href="https://www.pinterest.com/techmentorpalette/"><img src="pinterest.png" alt="Pinterest" style="width:14px;height:14px;"></a>
+        <a href="https://www.linkedin.com/company/techpalettementor/"><img src="linkedin.png" alt="LinkedIn" style="width:14px;height:14px;"></a>
+    </p>
+</footer>
+
+<!-- Menu functionality -->
+<script>
+    const menuIcon = document.getElementById("menu-icon");
+    const dropdown = document.querySelector(".dropdown");
+
+    menuIcon.addEventListener("click", () => {
+        menuIcon.classList.toggle("active");
+        dropdown.classList.toggle("active"); // Toggling active class to control dropdown visibility
+    });
+</script>
+
+</body>
+</html>

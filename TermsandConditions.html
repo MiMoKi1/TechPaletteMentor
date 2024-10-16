@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/x-icon" href="http://127.0.0.1:8080/favicon.ico">
+    <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+
+    <title>Terms and Conditions - Tech Palette Mentor</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #FFFFFF; /* Light background color */
+            color: #333; /* Dark text color for contrast */
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+            display: flex;
+overflow: auto;
+            flex-direction: column;
+            min-height: 100vh; /* Ensure the footer stays at the bottom */
+ font-size: 12px; /* Reduced font size */
+        }
+        #header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        #logo {
+           position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 100px;
+            height: auto;
+            z-index: 100;
+
+        }
+        h1 {
+            color: #888888; /* Darker color for the header */
+        }
+        h2 {
+            margin-top: 2px;
+            color: #666; /* Slightly lighter for section headers */
+        }
+        h3 {
+            margin-top: 15px;
+            margin-bottom: 5px;
+        }
+        p {
+            margin: 10px 0;
+        }
+        ul {
+            margin-left: 20px; /* Indent for lists */
+        }
+        footer {
+            margin-top: auto; /* Push footer to the bottom */
+            text-align: center;
+            padding: 10px 0;
+            background-color: #FFFFFF;
+        }
+        footer a {
+            color: black; /* Default black color */
+            text-decoration: none;
+            margin: 0 10px;
+            transition: color 0.3s ease, font-weight 0.3s ease;
+        }
+        footer a:hover {
+            font-weight: bold;
+        }
+        footer a:active {
+            color: white;
+        }
+        footer a:visited {
+            color: black;
+        }
+    /* Menu Icon (Moved to the top-right) */
+#menu-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px; /* Move to the right side */
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+#menu-icon:hover {
+    transform: scale(1.1);
+    filter: brightness(1.2);
+}
+
+/* Dropdown Menu (Moved under the icon on the right) */
+.dropdown {
+    position: absolute;
+    top: 60px; /* Position dropdown slightly below the icon */
+    right: 10px; /* Align dropdown to the right */
+    background-color: #FAF2E2;
+    border: 1px solid #8B5B29;
+    border-radius: 5px;
+    display: none;
+    flex-direction: column;
+    width: 160px;
+    padding: 5px;
+}
+
+.dropdown a {
+    text-decoration: none;
+    color: #8B5B29;
+    padding: 10px;
+    display: block;
+    transition: background-color 0.3s ease, font-weight 0.3s ease;
+}
+
+.dropdown a:hover {
+    background-color: #8B5B29;
+    color: white;
+    font-weight: bold;
+}
+
+#menu-icon.active + .dropdown {
+    display: flex;
+}
+
+/* Purchase button styles */
+form {
+    text-align: center;
+}
+
+button {
+    background-color: #FF6F61; /* Cute pink color */
+    color: white;
+    border: none;
+    border-radius: 12px; /* Rounded corners */
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    position: relative;
+    overflow: hidden; /* To contain the pseudo-element */
+    transition: transform 0.3s;
+}
+
+button::before {
+    content: '❤️'; /* Heart symbol */
+    position: absolute;
+    left: 84px; /* Adjusted left position */
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px; /* Heart size */
+    opacity: 0.7; /* Slightly transparent */
+}
+
+button:hover {
+    background-color: #FF4C4C; /* Darker pink on hover */
+    transform: scale(1.05); /* Slight scale on hover */
+}
+
+
+    </style>
+</head>
+<body>
+
+<!-- Menu Icon -->
+        <img id="menu-icon" src="menu.png" alt="Menu Icon">
+
+        <!-- Dropdown Menu -->
+        <div class="dropdown">
+    <a href="index.html">Home</a>
+    <a href="AboutUs.html">About Us</a>
+    <a href="HowToUse.html">How to Use</a>
+    <a href="buynow.html">Buy</a>
+    <a href="App.html">Web App</a>
+ <a href="ContactUs.html">Contact Us</a>
+        </div>
+
+
+    <div id="header">
+       <a href="index.html"> <!-- Change 'index.html' to your homepage URL if different -->
+    <img id="logo" src="palettementor100x100transp.png" alt="Tech Palette MentorLogo">
+</a>
+
+        <h1>Terms and Conditions</h1>
+        <p><strong>Effective Date:</strong> October 2024</p>
+    </div>
+<div id="copyright">
+    <p>&copy; 2024 Tech Palette Mentor. All rights reserved.</p>
+    <p>The Tech Palette Mentor logo and all related content, including but not limited to the software code, designs, and graphics, are the intellectual property of Tech Palette Mentor. Unauthorized use, reproduction, or distribution of any part of this website is prohibited.For inquiries regarding licensing or permissions, please contact us at <a href="mailto:mentorpalette@gmail.com">mentorpalette@gmail.com</a>.</p>
+</div>
+    <h2>1. Acceptance of Terms</h2>
+    <p>By using the Tech Palette Mentor application (the "App"), you agree to these Terms and Conditions. If you do not agree, please do not use the App.</p>
+
+    <h2>2. Use of the App</h2>
+    <p>You are granted a limited, non-exclusive, non-transferable license to use the App for personal, non-commercial purposes. You may not:</p>
+    <ul>
+        <li>Modify, distribute, or create derivative works based on the App.</li>
+        <li>Use the App for any illegal or unauthorized purpose.</li>
+    </ul>
+
+    <h2>3. User Content</h2>
+    <p>You are solely responsible for any content you upload, create, or share while using the App. Your images will not be stored, we do not have access to images, and the work you create from using this app is and will remain your intellectual property and your license.</p>
+
+    <h2>4. Limitation of Liability</h2>
+    <p>To the fullest extent permitted by law, Tech Palette Mentor and its affiliates shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of the App. This includes, but is not limited to, loss of profits, data, or other intangible losses.</p>
+
+    <h2>5. Disclaimers</h2>
+    <p>The App is provided "as is" and "as available" without any warranties of any kind. We do not guarantee that the App will be error-free or uninterrupted.</p>
+
+    <h2>6. Governing Law</h2>
+    <p>These Terms and Conditions shall be governed by and construed in accordance with the laws of Ireland. Any disputes arising out of or related to these terms shall be resolved in the courts of Ireland.</p>
+
+    <h2>7. Changes to Terms</h2>
+    <p>We reserve the right to modify these Terms and Conditions at any time. Changes will be effective immediately upon posting on the App. Your continued use of the App constitutes acceptance of the revised terms.</p>
+
+<h2>License</h2>  
+<p>All rights reserved. This software and its associated files are the property of the author and may not be:</p>
+<p>- Copied</p>
+<p>- Modified</p>
+<p>- Distributed</p>
+<p>- Sold</p>
+<p>- Used for any purpose without explicit permission from the author. For inquiries about licensing, contact us via email.</p>
+<p> Any work made by users is their license, we have no access to images uploaded bar their file type to ensure only images are uploaded. </p>
+
+
+    <h2>8. Contact Information</h2>
+    <p>For any questions or concerns regarding these Terms and Conditions, please contact us at <a href="mailto:mentorpalette@gmail.com">mentorpalette@gmail.com</a>.</p>
+
+<section id="purchase">
+    <h2>Get Access</h2>
+    <p>Unlock the full potential of Tech Palette Mentor by purchasing access to our exclusive features.</p>
+    <form action="your_stripe_link_here" method="POST">
+        <button type="submit">Buy Now</button>
+    </form>
+</section>
+
+<script>
+        const menuIcon = document.getElementById("menu-icon");
+        const dropdown = document.querySelector(".dropdown");
+
+        menuIcon.addEventListener("click", () => {
+            menuIcon.classList.toggle("active");
+            dropdown.classList.toggle("active");
+        });
+    </script>
+
+
+<footer>
+    <p style="font-size: 10px;"> <!-- Reduced font size -->
+        <a href="PrivacyPolicy.html">Privacy Policy</a> |
+        <a href="LegalDisclaimer.html">Legal Disclaimer</a> |
+        <a href="ContactUs.html">Contact Us</a> |
+        <a href="index.html">Back to Home</a>
+            <a href="https://www.instagram.com/techpalettementor"><img src="instagram.png" alt="Instagram" style="width:14px;height:14px;"></a>
+	   <a href="https://www.pinterest.com/techpalettementor/"><img src="pinterest.png" alt="Pinterest" style="width:14px;height:14px;"></a>
+<a href="https://www.linkedin.com/company/techpalettementor/"><img src="linkedin.png" alt="LinkedIn" style="width:14px;height:14px;"></a>
+    </p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="favicon.ico"> <!-- Favicon -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet"> <!-- Font -->
+    <title>Tech Palette Mentor - Sales Page</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #FFFFFF;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        /* Header styles */
+        #header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        #logo {
+            width: 100px;
+        }
+
+        h1 {
+            color: #888;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        /* Section styles */
+        section {
+            margin-bottom: 40px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fafafa;
+        }
+
+        h2 {
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        /* Purchase button styles */
+        form {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        button {
+            background-color: #8B5B29;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #a86535;
+        }
+
+        /* Footer styles */
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #f8f8f8;
+        }
+
+        footer a {
+            color: #333;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 14px;
+            transition: color 0.3s ease, font-weight 0.3s ease;
+        }
+
+        footer a:hover {
+            font-weight: bold;
+        }
+
+      /* Menu Icon (Moved to the top-right) */
+#menu-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px; /* Move to the right side */
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+#menu-icon:hover {
+    transform: scale(1.1);
+    filter: brightness(1.2);
+}
+
+/* Dropdown Menu (Moved under the icon on the right) */
+.dropdown {
+    position: absolute;
+    top: 60px; /* Position dropdown slightly below the icon */
+    right: 10px; /* Align dropdown to the right */
+    background-color: #FAF2E2;
+    border: 1px solid #8B5B29;
+    border-radius: 5px;
+    display: none;
+    flex-direction: column;
+    width: 160px;
+    padding: 5px;
+}
+
+.dropdown a {
+    text-decoration: none;
+    color: #8B5B29;
+    padding: 10px;
+    display: block;
+    transition: background-color 0.3s ease, font-weight 0.3s ease;
+}
+
+.dropdown a:hover {
+    background-color: #8B5B29;
+    color: white;
+    font-weight: bold;
+}
+
+#menu-icon.active + .dropdown {
+    display: flex;
+}
+
+/* Purchase button styles */
+form {
+    text-align: center;
+}
+
+button {
+    background-color: #FF6F61; /* Cute pink color */
+    color: white;
+    border: none;
+    border-radius: 12px; /* Rounded corners */
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    position: relative;
+    overflow: hidden; /* To contain the pseudo-element */
+    transition: transform 0.3s;
+}
+
+button::before {
+    content: '❤️'; /* Heart symbol */
+    position: absolute;
+    left: 84px; /* Adjusted left position */
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px; /* Heart size */
+    opacity: 0.7; /* Slightly transparent */
+}
+
+button:hover {
+    background-color: #FF4C4C; /* Darker pink on hover */
+    transform: scale(1.05); /* Slight scale on hover */
+}
+
+
+
+    </style>
+</head>
+<body>
+
+<!-- Menu Icon -->
+        <img id="menu-icon" src="menu.png" alt="Menu Icon">
+
+        <!-- Dropdown Menu -->
+        <div class="dropdown">
+    <a href="index.html">Home</a>
+    <a href="AboutUs.html">About Us</a>
+    <a href="HowToUse.html">How to Use</a>
+    <a href="buynow.html">Buy</a>
+    <a href="App.html">Web App</a>
+ <a href="ContactUs.html">Contact Us</a>
+        </div>
+
+
+<!-- Header -->
+<div id="header">
+    <a href="index.html">
+        <img id="logo" src="palettementor100x100transp.png" alt="Tech Palette Mentor Logo">
+    </a>
+</div>
+
+<header>
+    <h1>Unlock Your Creative Potential with Tech Palette Mentor</h1>
+</header>
+
+<section id="sales-pitch">
+    <h2>Transform Your Artistic Journey</h2>
+    <p>Are you an artist looking to elevate your work? Tech Palette Mentor is the ultimate tool that empowers you to blend colours like never before, using your actual paint inventory to create stunning visuals.</p>
+    <form action="your_stripe_link_here" method="POST">
+        <button type="submit">Buy Now</button>
+    </form>
+    <p>Say goodbye to guesswork and hello to precision! With our unique blending algorithm, you can recreate any image using the paints you already own. This tool is designed to make art more accessible and enjoyable.</p>
+</section>
+
+<section id="features">
+    <h2>Why Choose Tech Palette Mentor?</h2>
+    <p>Our app provides:</p>
+    <ul>
+        <li>Real-time blending suggestions based on your personal paint inventory.</li>
+        <li>Intuitive interface for easy navigation and usage.</li>
+        <li>Experiment with colour theory to enhance your skills.</li>
+        <li>Support for various file types, making it versatile for all your needs.</li>
+    </ul>
+    <form action="your_stripe_link_here" method="POST">
+        <button type="submit">Buy Now</button>
+    </form>
+</section>
+
+<section id="purchase">
+    <h2>Get Started Today!</h2>
+    <p>Unlock the full potential of your artistic abilities and revolutionize your painting process. Join a community of artists who are already experiencing the benefits of Tech Palette Mentor.</p>
+    <form action="your_stripe_link_here" method="POST">
+        <button type="submit">Buy Now</button>
+    </form>
+</section>
+
+<script>
+        const menuIcon = document.getElementById("menu-icon");
+        const dropdown = document.querySelector(".dropdown");
+
+        menuIcon.addEventListener("click", () => {
+            menuIcon.classList.toggle("active");
+            dropdown.classList.toggle("active");
+        });
+    </script>
+
+
+
+<!-- Footer -->
+<footer>
+    <p>&copy; 2024 Tech Palette Mentor. All rights reserved.</p>
+    <p>
+        <a href="TermsandConditions.html">T&C</a> |
+        <a href="PrivacyPolicy.html">Privacy Policy</a> |
+        <a href="ContactUs.html">Contact Us</a> |
+        <a href="index.html">Back to Home</a>
+    </p>
+</footer>
+
+</body>
+</html>
