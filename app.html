@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/x-icon" href="http://127.0.0.1:8080/favicon.ico">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <title>Tech Palette Mentor</title>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4YZ8N3B9R7"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-4YZ8N3B9R7');
+    </script>
+
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            margin: 0;
+            height: 100vh;
+            overflow: auto;
+            background-color: #FAF2E2;
+ font-size: 12px; /* Reduced font size */
+        }
+        #header {
+            text-align: center;
+            margin: 10px 0;
+            font-family: Poppins, sans-serif;
+            font-size: 26px;
+            color: black;
+            padding: 4px;
+            background-color: #FAF2E2;
+        }
+        #logo {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 100px;
+            height: auto;
+            z-index: 100;
+        }
+        #canvas-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: auto
+            background-color: #FAF2E2;
+        }
+        #canvas {
+            display: block;
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            transition: transform 0.2s ease-in-out;
+        }
+        #controls {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 5px;
+            background-color: #F5F5F5;
+            border: 1px solid #ccc;
+            z-index: 10;
+            font-size: 12px;
+            max-width: 280px;
+        }
+        .inline-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        #hexDisplay {
+            display: flex;
+            align-items: center;
+            margin-top: 2px;
+        }
+        #colorDisplay {
+            width: 40px;
+            height: 20px;
+            margin-left: 5px;
+            border: 1px solid #000;
+        }
+        button, input[type="color"], input[type="range"] {
+            margin-right: 5px;
+            padding: 5px 8px;
+            font-size: 12px;
+            background-color: #D8CBAF;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        #toggleDrawingAids:hover, #togglePalette:hover {
+            background-color: #8B5B29;
+        }
+        button:hover {
+            background-color: #C49337;
+        }
+        input[type="number"] {
+            background-color: #fff;
+            color: black;
+            margin-right: 5px;
+            padding: 5px 8px;
+            font-size: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        hr {
+            margin: 5px 0;
+            border: none;
+            border-top: 1px solid #ccc;
+        }
+        .grid-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        .grid-controls input[type="range"] {
+            width: 100px;
+        }
+        #palette {
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            margin-top: 10px;
+            display: none;
+        }
+        .palette-item {
+            display: flex;
+            align-items: center;
+            margin: 3px 0;
+        }
+        .swatch {
+            width: 15px;
+            height: 15px;
+            margin-right: 5px;
+            border: 1px solid #000;
+        }
+        #searchBox {
+            width: 80px;
+            padding: 5px;
+        }
+        .palette-buttons {
+            display: flex;
+            flex-direction: column;
+            margin-top: 10px;
+        }
+        .blend-count-controls {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .palette-action-controls {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .selected-swatch {
+            border: 3px solid #000;
+        }
+        footer {
+            margin-top: auto;
+            text-align: center;
+            padding: 10px 0;
+            background-color: #FAF2E2;
+            position: relative;
+        }
+        footer a {
+            color: black;
+            text-decoration: none;
+            margin: 0 10px;
+	    font-size: 10px;
+            transition: color 0.3s ease, font-weight 0.3s ease;
+        }
+        footer a:hover {
+            font-weight: bold;
+        }
+        footer a:active {
+            color: white;
+        }
+        footer a:visited {
+            color: black;
+        }
+        footer p {
+        font-size: 10px; /* Adjust the size to make the text smaller */
+        color: black;
+    }
+        /* Dropdown Menu Styles */
+        #menu-icon {
+            position: absolute;
+            top: 120px;
+            left: 10px;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+
+        #menu-icon:hover {
+            transform: scale(1.1);
+            filter: brightness(1.2);
+        }
+
+        .dropdown {
+            position: absolute;
+            top: 170px;
+            left: 10px;
+            background-color: #FAF2E2;
+            border: 1px solid #8B5B29;
+            border-radius: 5px;
+            display: none;
+            flex-direction: column;
+            width: 160px;
+            padding: 5px;
+        }
+
+        .dropdown a {
+            text-decoration: none;
+            color: #8B5B29;
+            padding: 10px;
+            display: block;
+            transition: background-color 0.3s ease, font-weight 0.3s ease;
+        }
+
+        .dropdown a:hover {
+            background-color: #8B5B29;
+            color: white;
+            font-weight: bold;
+        }
+
+        #menu-icon.active + .dropdown {
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <div id="canvas-container">
+        <div id="header">palette mentor</div>
+      <a href="index.html"> <!-- Change 'index.html' to your homepage URL if different -->
+    <img id="logo" src="palettementor100x100transp.png" alt="Palette Mentor Logo">
+</a>
+
+
+ <!-- Menu Icon -->
+        <img id="menu-icon" src="menu.png" alt="Menu Icon">
+
+        <!-- Dropdown Menu -->
+        <div class="dropdown">
+    <a href="index.html">Home</a>
+    <a href="AboutUs.html">About Us</a>
+    <a href="HowToUse.html">How to Use</a>
+    <a href="buynow.html">Buy</a>
+    <a href="App.html">Web App</a>
+ <a href="ContactUs.html">Contact Us</a>
+        </div>
+
+        <canvas id="canvas"></canvas>
+        <div id="controls">
+            <div class="inline-controls">
+                <strong>Upload image:</strong>
+                <input type="file" id="imageUpload" accept="image/png, image/jpeg">
+            </div>
+            <hr>
+            <button id="toggleDrawingAids">Drawing Aids</button>
+            <div id="drawingAids" style="display: none;">
+                <div class="grid-controls">
+                    <button id="toggleGrid">Grid</button>
+                    <input type="color" id="gridColor" value="#C49380" title="Choose Grid Color">
+                    <input type="range" id="gridSize" min="2" max="20" value="10" title="Grid Size">
+                </div>
+                <hr>
+                <div class="inline-controls">
+                    <button id="goldenRatioButton">Golden Ratio</button>
+                    <input type="color" id="goldenRatioColor" value="#FFD700" title="Choose Golden Ratio Color">
+                </div>
+                <hr>
+            </div>
+            <div id="hexDisplay">
+                <h4 id="hexValue">Hex Value: N/A</h4>
+                <div id="colorDisplay"></div>
+            </div>
+            <hr>
+            <strong>Blends:</strong>
+            <div id="results"></div>
+            <hr>
+            <button id="togglePalette">Palette</button>
+            <div id="paletteButtons" class="palette-buttons" style="display: none;">
+                <div class="blend-count-controls inline-controls">
+                    <strong><label for="blendCount">Number of colors to blend:</label></strong>
+                    <input type="number" id="blendCount" min="1" max="10" value="3">
+                </div>
+                <div class="palette-action-controls inline-controls">
+                    <button id="selectAll">Select All</button>
+                    <button id="clearAll">Clear</button>
+                    <label for="searchBox">Search:</label>
+                    <input type="text" id="searchBox" placeholder="name,hex,pigment code">
+                </div>
+            </div>
+            <div id="palette" style="display:none;"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/tinycolor2@1.4.2/dist/tinycolor-min.js"></script>
+    <script src="renderer.js"></script>
+
+ <script>
+        const menuIcon = document.getElementById("menu-icon");
+        const dropdown = document.querySelector(".dropdown");
+
+        menuIcon.addEventListener("click", () => {
+            menuIcon.classList.toggle("active");
+            dropdown.classList.toggle("active");
+        });
+    </script>
+
+    <footer>
+        <p>
+	           © 2024 Palette Mentor. All Rights Reserved.
+            <a href="TermsandConditions.html">T&C</a> |
+            <a href="PrivacyPolicy.html">Privacy Policy</a> |
+            <a href="LegalDisclaimer.html">Legal Disclaimer</a> |
+            <a href="ContactUs.html">Contact Us</a> |
+            <a href="https://www.instagram.com/techpalettementor"><img src="instagram.png" alt="Instagram" style="width:14px;height:14px;"></a>
+	   <a href="https://www.pinterest.com/techpalettementor/"><img src="pinterest.png" alt="Pinterest" style="width:14px;height:14px;"></a>
+<a href="https://www.linkedin.com/company/techpalettementor/"><img src="linkedin.png" alt="LinkedIn" style="width:14px;height:14px;"></a>
+        </p>
+
+    </footer>
+</body>
+</html>
