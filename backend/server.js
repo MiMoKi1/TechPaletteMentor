@@ -20,6 +20,26 @@ const pool = new Pool({
 app.use(cors());
 app.use(bodyParser.json());
 
+
+app.post('/webhook', async (req, res) => {
+    const event = req.body;
+
+    if (event.type === 'checkout.session.completed') {
+        const session = event.data.object;
+        const email = session.customer_email; // Get email from session
+
+        // Update user's payment status in your database
+        // Assume you have a function to update payment status
+        await updatePaymentStatus(email, true);
+    }
+
+    res.status(200).send('Webhook received');
+});
+
+// Replace with your database update logic
+async function updatePaymentStatus(email, status) {
+    // Implement your logic to update the database
+}
 // Payment Route
 app.post('/pay', async (req, res) => {
   try {
