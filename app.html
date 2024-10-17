@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <title>Tech Palette Mentor</title>
-
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script src="googleOAuth.js"></script>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4YZ8N3B9R7"></script>
     <script>
@@ -15,10 +16,6 @@
         gtag('js', new Date());
         gtag('config', 'G-4YZ8N3B9R7');
     </script>
-
-
-	    <script src="https://apis.google.com/js/api.js"></script>
-    <script src="googleOAuth.js"></script> 
 
 	
     <style>
@@ -257,7 +254,7 @@
     </style>
 </head>
 <body>
-	<body onload="handleClientLoad()">
+<body onload="initGoogleAuth()">
 
     <div id="canvas-container">
         <div id="header">palette mentor</div>
@@ -349,14 +346,12 @@ let userHasPaid = false; // Flag to check payment status
                 scope: 'profile email'
             });
         auth2.isSignedIn.listen(updateSigninStatus);
-        checkUserToken(); // Check user token on load
+                updateSigninStatus(auth2.isSignedIn.get());
         });
     }
 
     function updateSigninStatus(isSignedIn) {
         if (isSignedIn) {
-            // User is signed in
-            // Call your function to check token or allow access
             console.log('User is signed in');
 	    checkUserPayment(); // Check if user has pai
         } else {
@@ -373,12 +368,12 @@ let userHasPaid = false; // Flag to check payment status
     }
 
 function checkUserPayment() {
-   
     const userProfile = auth2.currentUser.get();
     const userId = userProfile.getId(); // Get the user's Google ID
+ const accessToken = userProfile.getAuthResponse().access_token; // Get the access token
 
-    // Example of a payment check function; you may need to implement this serverless function
-    fetch(`YOUR_SERVERLESS_FUNCTION_URL?userId=${userId}`)
+	
+    fetch(`https://techpalettementorback-710cc139297d.herokuapp.com/?userId=${userId}`)
         .then(response => response.json())
         .then(data => {
             userHasPaid = data.hasPaid; // Assume your server returns { hasPaid: true/false }
