@@ -9,6 +9,12 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(bodyParser.json());
 
+// Set Content Security Policy
+app.use((req, res, next) => {
+    res.setHeader("Content-Security-Policy", "default-src 'self'; script-src 'self' https://apis.google.com;");
+    next();
+});
+
 // In-memory store for tokens (for demonstration only)
 const tokensStore = {};
 const paymentsStore = {}; // Store for payments
@@ -39,6 +45,7 @@ app.post('/pay', async (req, res) => {
 
         res.json({ payment, token }); // Send the token back to the client
     } catch (error) {
+        console.error('Payment error:', error); // Log payment error
         res.status(500).send(error);
     }
 });
@@ -61,10 +68,15 @@ app.get('/check-payment/:userId', (req, res) => {
 app.get('/check-token/:userId', (req, res) => {
     const userId = req.params.userId;
 
-    // Check if the user has a valid token (e.g., stored in a database)
+    // Check if the user has a valid token
     const hasAccess = tokensStore[userId] !== undefined;
 
     res.json({ hasAccess });
+});
+
+// Add a root route for testing
+app.get('/', (req, res) => {
+    res.send('Hello World!'); // Simple response for root route
 });
 
 // Start the server
