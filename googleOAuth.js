@@ -1,1 +1,63 @@
-const a0_0x29112d=a0_0x2df1;(function(_0xa5bdb7,_0x301712){const _0x22d4fe=a0_0x2df1,_0x58275a=_0xa5bdb7();while(!![]){try{const _0x408950=-parseInt(_0x22d4fe(0xe7))/0x1*(parseInt(_0x22d4fe(0xf8))/0x2)+parseInt(_0x22d4fe(0x104))/0x3*(-parseInt(_0x22d4fe(0xea))/0x4)+-parseInt(_0x22d4fe(0xe2))/0x5*(parseInt(_0x22d4fe(0xfb))/0x6)+parseInt(_0x22d4fe(0xfc))/0x7+-parseInt(_0x22d4fe(0x100))/0x8+parseInt(_0x22d4fe(0xe9))/0x9+-parseInt(_0x22d4fe(0xe5))/0xa*(-parseInt(_0x22d4fe(0xf3))/0xb);if(_0x408950===_0x301712)break;else _0x58275a['push'](_0x58275a['shift']());}catch(_0x2d762a){_0x58275a['push'](_0x58275a['shift']());}}}(a0_0x396b,0xa6819));const CLIENT_ID='1031883252330-j3vht1ianq6850l0p78mv3nu2t1f4ks3.apps.googleusercontent.com',SCOPES=a0_0x29112d(0xec),REDIRECT_URI=a0_0x29112d(0xf6);function handleClientLoad(){const _0x6cd851=a0_0x29112d;gapi[_0x6cd851(0xf5)](_0x6cd851(0xeb),initClient);}function initClient(){const _0x37b776=a0_0x29112d;gapi[_0x37b776(0xf0)]['init']({'clientId':CLIENT_ID,'scope':SCOPES})[_0x37b776(0xfd)](()=>{const _0x126f76=_0x37b776,_0x37a962=gapi[_0x126f76(0x103)]['getAuthInstance']();_0x37a962['isSignedIn'][_0x126f76(0xf2)]()?(console[_0x126f76(0xf4)](_0x126f76(0xfe)),checkUserPayment(_0x37a962)):_0x37a962[_0x126f76(0xed)]()[_0x126f76(0xfd)](()=>{const _0x1999ba=_0x126f76;console[_0x1999ba(0xf4)]('User\x20signed\x20in'),checkUserPayment(_0x37a962);});})[_0x37b776(0xe3)](_0x39771b=>{const _0x514513=_0x37b776;console[_0x514513(0x102)](_0x514513(0x101),_0x39771b);});}function checkUserPayment(_0x51bff2){const _0x464b04=a0_0x29112d,_0x17d0c2=_0x51bff2[_0x464b04(0xee)][_0x464b04(0xf2)](),_0x2af65c=_0x17d0c2[_0x464b04(0xf1)]();fetch(_0x464b04(0xfa)+_0x2af65c)['then'](_0x8ac645=>_0x8ac645[_0x464b04(0xef)]())[_0x464b04(0xfd)](_0x36bd94=>{const _0x2fde4f=_0x464b04;_0x36bd94[_0x2fde4f(0xf9)]?(console[_0x2fde4f(0xf4)]('User\x20has\x20paid.\x20Grant\x20access\x20to\x20the\x20app.'),loadAppFeatures()):(console[_0x2fde4f(0x102)](_0x2fde4f(0xe6)),alert(_0x2fde4f(0xe1)),_0x51bff2['signOut']());})['catch'](_0x142c96=>{const _0x5a1ffa=_0x464b04;console[_0x5a1ffa(0x102)](_0x5a1ffa(0xff),_0x142c96);});}function a0_0x2df1(_0x17a455,_0x2f1c0b){const _0x396bf1=a0_0x396b();return a0_0x2df1=function(_0x2df10b,_0x1b55a7){_0x2df10b=_0x2df10b-0xe1;let _0x45a86a=_0x396bf1[_0x2df10b];return _0x45a86a;},a0_0x2df1(_0x17a455,_0x2f1c0b);}function loadAppFeatures(){const _0x4bc280=a0_0x29112d;console[_0x4bc280(0xf4)](_0x4bc280(0xe8));}document[a0_0x29112d(0xf7)](a0_0x29112d(0xe4),handleClientLoad);function a0_0x396b(){const _0x22a0fa=['5424375euPrnn','log','load','https://techpalettementorback-710cc139297d.herokuapp.com/oauth2callback','addEventListener','104974XfgVsB','hasPaid','https://techpalettementorback-710cc139297d.herokuapp.com/check-payment/','8724oIVKjc','4783646YQIKuM','then','User\x20is\x20already\x20signed\x20in','Error\x20checking\x20payment\x20status:','9773344RvplIe','Error\x20during\x20Google\x20API\x20initialization:','error','auth2','1884894SdxVDj','Access\x20denied.\x20Please\x20purchase\x20access\x20to\x20the\x20app.','205nTboKX','catch','DOMContentLoaded','40aqFTIm','User\x20has\x20not\x20paid.\x20Access\x20denied.','2bEmOag','Loading\x20app\x20features...','366165hRZbgO','4tttWHu','client:auth2','https://www.googleapis.com/auth/userinfo.email','signIn','currentUser','json','client','getId','get'];a0_0x396b=function(){return _0x22a0fa;};return a0_0x396b();}
+// googleOAuth.js
+const CLIENT_ID = '1031883252330-j3vht1ianq6850l0p78mv3nu2t1f4ks3.apps.googleusercontent.com'; // Your actual Client ID
+const SCOPES = 'https://www.googleapis.com/auth/userinfo.email';
+const REDIRECT_URI = 'https://techpalettementorback.herokuapp.com/callback'; // Heroku redirect URI
+
+// Load the API client and auth2 library
+function handleClientLoad() {
+    gapi.load('client:auth2', initClient);
+}
+
+function initClient() {
+    gapi.client.init({
+        clientId: CLIENT_ID,
+        scope: SCOPES
+    }).then(() => {
+        const authInstance = gapi.auth2.getAuthInstance();
+        // Check if the user is already signed in
+        if (authInstance.isSignedIn.get()) {
+            console.log('User is already signed in');
+            checkUserPayment(authInstance); // Check payment status if signed in
+        } else {
+            // User is not signed in, trigger login
+            authInstance.signIn().then(() => {
+                console.log('User signed in');
+                checkUserPayment(authInstance); // Check payment status after signing in
+            });
+        }
+    }).catch(error => {
+        console.error('Error during Google API initialization:', error);
+    });
+}
+
+// Check if the user has paid after verifying their Google login
+function checkUserPayment(authInstance) {
+    const userProfile = authInstance.currentUser.get();
+    const userId = userProfile.getId(); // Get the user's Google ID
+
+    // Fetch from your Heroku backend to check if the user has paid
+    fetch(`https://techpalettementorback.herokuapp.com/check-payment/${userId}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.hasPaid) {
+                console.log('User has paid. Grant access to the app.');
+                loadAppFeatures(); // Load app features if the user has paid
+            } else {
+                console.error('User has not paid. Access denied.');
+                alert('Access denied. Please purchase access to the app.');
+                authInstance.signOut(); // Sign out if the user has not paid
+            }
+        })
+        .catch(error => {
+            console.error('Error checking payment status:', error);
+        });
+}
+
+// Function to load app features for paid users
+function loadAppFeatures() {
+    console.log('Loading app features...');
+    // Logic to display app features goes here
+}
+
+// Initialize Google Authentication
+document.addEventListener('DOMContentLoaded', handleClientLoad);
