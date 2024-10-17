@@ -249,11 +249,15 @@ button:hover {
     </p>
 
 
-<section id="purchase">
-    <form action="your_stripe_link_here" method="POST">
-        <button type="submit">Buy Now</button>
-    </form>
-</section>
+<script async
+  src="https://js.stripe.com/v3/buy-button.js">
+</script>
+
+<stripe-buy-button
+  buy-button-id="buy_btn_1QApqKIcCV1uZ856vlMNlS3k"
+  publishable-key="pk_live_51QAUaLIcCV1uZ856dNizRkc41p6GdHdxSpa91BcPfVLthFKC79e1zqyP169SsTkmQunQLCGeCFqZlIWYOeeFFcoA003NXZ8J1V"
+>
+</stripe-buy-button>
 
 
     <p><strong>Step 3: Get Personalised Blends</strong><br>
