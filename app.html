@@ -164,7 +164,12 @@
 
     <script src="https://cdn.jsdelivr.net/npm/tinycolor2@1.4.2/dist/tinycolor-min.js"></script>
     <script src="renderer.js"></script>
-    <script src="controls.js"></script>
+
+    <div id="app-content" style="display: none;"> 
+        <!-- App content goes here, including any elements you want to display after login -->
+        <h2>Welcome to Tech Palette Mentor!</h2>
+        <!-- Include any additional app-specific elements here -->
+    </div>
 
     <script src="https://apis.google.com/js/api.js" onload="onLoad()"></script>
     <script>
@@ -176,7 +181,7 @@
         // Initialize the Google API client
         async function initClient() {
             gapi.client.init({
-                clientId: '1031883252330-j3vht1ianq6850l0p78mv3nu2t1f4ks3.apps.googleusercontent.com', // Replace with your actual client ID
+                clientId: 'YOUR_CLIENT_ID_HERE', // Replace with your actual client ID
                 scope: 'openid email'
             }).then(() => {
                 // Listen for sign-in state changes
@@ -208,9 +213,12 @@
             const response = await fetch('https://mimoki1.github.io/TechPaletteMentor/tokens.json');
             const validUsers = await response.json();
 
+            console.log("Valid users list:", validUsers); // Add this line for debugging
+
             if (validUsers.includes(userEmail)) {
-                // Access granted, you can initialize your app here
-                document.getElementById('canvas-container').style.display = 'block'; // Show canvas and controls
+                // Access granted, show app content
+                document.getElementById('app-content').style.display = 'block';
+                // Initialize your app here if needed
             } else {
                 // Redirect to purchase page
                 window.location.href = 'purchase.html';
@@ -226,9 +234,7 @@
             © 2024 Palette Mentor. All Rights Reserved.
             <a href="TermsandConditions.html">T&C</a> |
             <a href="PrivacyPolicy.html">Privacy Policy</a> |
-            <a href="LegalDisclaimer.html">Legal Disclaimer</a> |
-            <a href="ContactUs.html">Contact Us</a> |
-            <a href="https://www.instagram.com/techpalettementor"><img src="instagram.png" alt="Instagram"></a>
+            <a href="Help.html">Help</a>
         </p>
     </footer>
 </body>
