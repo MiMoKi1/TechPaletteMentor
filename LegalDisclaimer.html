@@ -10,13 +10,13 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #FFFFFF; /* Light background color */
-            color: #333; /* Dark text color for contrast */
+            background-color: #FFFFFF;
+            color: #333;
             margin: 0;
             overflow: auto;
             padding: 20px;
             line-height: 1.6;
- font-size: 12px; /* Reduced font size */
+            font-size: 12px;
         }
 
         /* Header styles */
@@ -35,117 +35,120 @@
         }
 
         h1 {
-            color: #888888; /* Darker color for the header */
+            color: #888888;
             margin-left: auto;
             margin-right: auto;
             text-align: center;
         }
 
-footer {
-            margin-top: auto; /* Push footer to the bottom */
+        footer {
+            margin-top: auto;
             text-align: center;
             padding: 10px 0;
             background-color: ##FFFFFF;
         }
+
         footer a {
-            color: black; /* Default black color */
+            color: black;
             text-decoration: none;
             margin: 0 10px;
             transition: color 0.3s ease, font-weight 0.3s ease;
         }
+
         footer a:hover {
             font-weight: bold;
         }
+
         footer a:active {
             color: white;
         }
+
         footer a:visited {
             color: black;
         }
 
+        /* Menu Icon (Top-right corner) */
+        #menu-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
 
-    /* Menu Icon (Moved to the top-right) */
-#menu-icon {
-    position: absolute;
-    top: 10px;
-    right: 10px; /* Move to the right side */
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-    transition: transform 0.3s ease, filter 0.3s ease;
-}
+        #menu-icon:hover {
+            transform: scale(1.1);
+            filter: brightness(1.2);
+        }
 
-#menu-icon:hover {
-    transform: scale(1.1);
-    filter: brightness(1.2);
-}
+        /* Dropdown Menu (aligned under the icon on the right) */
+        .dropdown {
+            position: absolute;
+            top: 60px;
+            right: 10px;
+            background-color: #FAF2E2;
+            border: 1px solid #8B5B29;
+            border-radius: 5px;
+            display: none; /* Hidden by default */
+            flex-direction: column;
+            width: 160px;
+            padding: 5px;
+        }
 
-/* Dropdown Menu (Moved under the icon on the right) */
-.dropdown {
-    position: absolute;
-    top: 60px; /* Position dropdown slightly below the icon */
-    right: 10px; /* Align dropdown to the right */
-    background-color: #FAF2E2;
-    border: 1px solid #8B5B29;
-    border-radius: 5px;
-    display: none;
-    flex-direction: column;
-    width: 160px;
-    padding: 5px;
-}
+        .dropdown a {
+            text-decoration: none;
+            color: #8B5B29;
+            padding: 10px;
+            display: block;
+            transition: background-color 0.3s ease, font-weight 0.3s ease;
+        }
 
-.dropdown a {
-    text-decoration: none;
-    color: #8B5B29;
-    padding: 10px;
-    display: block;
-    transition: background-color 0.3s ease, font-weight 0.3s ease;
-}
+        .dropdown a:hover {
+            background-color: #8B5B29;
+            color: white;
+            font-weight: bold;
+        }
 
-.dropdown a:hover {
-    background-color: #8B5B29;
-    color: white;
-    font-weight: bold;
-}
+        /* Dropdown Menu active class */
+        .dropdown.active {
+            display: flex;
+        }
 
-#menu-icon.active + .dropdown {
-    display: flex;
-}
+        /* Purchase button styles */
+        form {
+            text-align: center;
+        }
 
-/* Purchase button styles */
-form {
-    text-align: center;
-}
+        button {
+            background-color: #FF6F61;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
 
-button {
-    background-color: #FF6F61; /* Cute pink color */
-    color: white;
-    border: none;
-    border-radius: 12px; /* Rounded corners */
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-    position: relative;
-    overflow: hidden; /* To contain the pseudo-element */
-    transition: transform 0.3s;
-}
+        button::before {
+            content: '❤️';
+            position: absolute;
+            left: 84px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 20px;
+            opacity: 0.7;
+        }
 
-button::before {
-    content: '❤️'; /* Heart symbol */
-    position: absolute;
-    left: 84px; /* Adjusted left position */
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 20px; /* Heart size */
-    opacity: 0.7; /* Slightly transparent */
-}
-
-button:hover {
-    background-color: #FF4C4C; /* Darker pink on hover */
-    transform: scale(1.05); /* Slight scale on hover */
-}
-
+        button:hover {
+            background-color: #FF4C4C;
+            transform: scale(1.05);
+        }
 
     </style>
 </head>
@@ -167,7 +170,7 @@ button:hover {
     <a href="HowToUse.html">How to Use</a>
     <a href="buynow.html">Buy</a>
     <a href="app.html">Web App</a>
- <a href="ContactUs.html">Contact Us</a>
+    <a href="ContactUs.html">Contact Us</a>
 </div>
 
 <h2>General Information</h2>
@@ -179,16 +182,12 @@ button:hover {
 <h2>User Responsibility</h2>
 <p>Users use the app at their own risk.</p>
 
-
-
-
 <!-- Menu functionality -->
 <script>
     const menuIcon = document.getElementById("menu-icon");
     const dropdown = document.querySelector(".dropdown");
 
     menuIcon.addEventListener("click", () => {
-        menuIcon.classList.toggle("active");
         dropdown.classList.toggle("active");
     });
 </script>
@@ -209,5 +208,6 @@ button:hover {
         <a href="https://www.linkedin.com/company/techpalettementor/"><img src="linkedin.png" alt="LinkedIn" style="width:14px;height:14px;"></a>
     </p>
 </footer>
+
 </body>
 </html>
