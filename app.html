@@ -17,6 +17,12 @@
         gtag('config', 'G-4YZ8N3B9R7');
     </script>
 
+
+    <script src="https://js.stripe.com/v3/"></script> <!-- Stripe JS -->
+
+    <script src="https://apis.google.com/js/api.js"></script> <!-- Google API JS -->
+
+	
     <style>
         body {
             display: flex;
@@ -269,6 +275,14 @@
  <a href="ContactUs.html">Contact Us</a>
         </div>
 
+
+        <!-- Google Sign-in Button -->
+        <button id="googleSignInBtn">Sign in with Google</button>
+
+        <!-- Stripe Checkout Button (will appear if not paid) -->
+        <button id="stripeCheckoutBtn" style="display:none;">Buy the App</button>
+	    
+	    
         <canvas id="canvas"></canvas>
         <div id="controls">
             <div class="inline-controls">
@@ -341,36 +355,80 @@
         </p>
 
     </footer>
-<!-- Code injected by live-server -->
-<script type="text/javascript">
-	// <![CDATA[  <-- For SVG support
-	if ('WebSocket' in window) {
-		(function() {
-			function refreshCSS() {
-				var sheets = [].slice.call(document.getElementsByTagName("link"));
-				var head = document.getElementsByTagName("head")[0];
-				for (var i = 0; i < sheets.length; ++i) {
-					var elem = sheets[i];
-					head.removeChild(elem);
-					var rel = elem.rel;
-					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
-						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
-						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
-					}
-					head.appendChild(elem);
-				}
-			}
-			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
-			var address = protocol + window.location.host + window.location.pathname + '/ws';
-			var socket = new WebSocket(address);
-			socket.onmessage = function(msg) {
-				if (msg.data == 'reload') window.location.reload();
-				else if (msg.data == 'refreshcss') refreshCSS();
-			};
-			console.log('Live reload enabled.');
-		})();
-	}
-	// ]]>
-</script>
+  <script>
+        // Google OAuth logic
+        function handleClientLoad() {
+            gapi.load('client:auth2', initClient);
+        }
+
+        function initClient() {
+            gapi.client.init({
+                clientId: 'YOUR_GOOGLE_CLIENT_ID',
+                scope: 'https://www.googleapis.com/auth/userinfo.email'
+            }).then(() => {
+                const authInstance = gapi.auth2.getAuthInstance();
+                document.getElementById('googleSignInBtn').onclick = () => {
+                    authInstance.signIn().then(() => {
+                        checkUserPayment(authInstance);
+                    });
+                };
+            }).catch(error => {
+                console.error('Error during Google API initialization:', error);
+            });
+        }
+
+        function checkUserPayment(authInstance) {
+            const userProfile = authInstance.currentUser.get();
+            const userId = userProfile.getId(); // Get Google user ID
+
+            // Check payment status via backend
+            fetch(`https://techpalettementorback-710cc139297d.herokuapp.com/check-token/${userId}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.hasPaid) {
+                        console.log('User has paid. Grant access to the app.');
+                        loadAppFeatures(); // Load app features if the user has paid
+                    } else {
+                        console.error('User has not paid.');
+                        document.getElementById('stripeCheckoutBtn').style.display = 'block'; // Show Stripe button
+                    }
+                })
+                .catch(error => {
+                    console.error('Error checking payment status:', error);
+                });
+        }
+
+        function loadAppFeatures() {
+            console.log('Loading app features...');
+            // Logic to display app features goes here
+        }
+
+        // Stripe Payment Setup
+        var stripe = Stripe('YOUR_STRIPE_PUBLISHABLE_KEY');
+        document.getElementById('stripeCheckoutBtn').addEventListener('click', function () {
+            fetch('https://techpalettementorback-710cc139297d.herokuapp.com/create-checkout-session', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(response => response.json())
+            .then(session => {
+                return stripe.redirectToCheckout({ sessionId: session.id });
+            })
+            .then(result => {
+                if (result.error) {
+                    alert(result.error.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+
+        // Initialize Google OAuth
+        document.addEventListener('DOMContentLoaded', handleClientLoad);
+    </script>
+	
 </body>
 </html>
