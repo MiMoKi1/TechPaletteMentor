@@ -2,14 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-	<script>
-    function onLoad() {
-        handleClientLoad(); // Call this function to load the Google client
-    }
-</script>
-
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/x-icon" href="http://127.0.0.1:8080/favicon.ico">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
@@ -24,13 +17,6 @@
         gtag('config', 'G-4YZ8N3B9R7');
     </script>
 
-
-    <script src="https://js.stripe.com/v3/"></script> <!-- Stripe JS -->
-
-<script src="https://apis.google.com/js/api.js?onload=onLoad"></script>
-
-
-	
     <style>
         body {
             display: flex;
@@ -53,7 +39,7 @@
             background-color: #FAF2E2;
         }
         #logo {
-            position: fixed;
+            position: absolute;
             top: 10px;
             left: 10px;
             width: 100px;
@@ -64,7 +50,7 @@
             width: 100%;
             height: 100%;
             position: relative;
-            overflow: auto;
+            overflow: auto
             background-color: #FAF2E2;
         }
         #canvas {
@@ -260,26 +246,15 @@
         #menu-icon.active + .dropdown {
             display: flex;
         }
-
-	    #loginModal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.7);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000; /* Ensure it appears above other elements */
-}
-
     </style>
 </head>
 <body>
     <div id="canvas-container">
         <div id="header">palette mentor</div>
-  
+      <a href="index.html"> <!-- Change 'index.html' to your homepage URL if different -->
+    <img id="logo" src="palettementor100x100transp.png" alt="Palette Mentor Logo">
+</a>
+
 
  <!-- Menu Icon -->
         <img id="menu-icon" src="menu.png" alt="Menu Icon">
@@ -293,22 +268,7 @@
     <a href="App.html">Web App</a>
  <a href="ContactUs.html">Contact Us</a>
         </div>
-	    
-<!-- Google Login Modal -->
-<div id="loginModal" style="display: none;">
-    <div style="background-color: white; padding: 20px; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);">
-        <h3>Login Required</h3>
-        <p>Please log in with Google to access this application.</p>
-        <button id="loginWithGoogle">Log in with Google</button>
-        <button id="closeModal">Close</button>
-    </div>
-</div>
 
-
-        <!-- Stripe Checkout Button (will appear if not paid) -->
-        <button id="stripeCheckoutBtn" style="display:none;">Buy the App</button>
-	    
-	    
         <canvas id="canvas"></canvas>
         <div id="controls">
             <div class="inline-controls">
@@ -381,142 +341,36 @@
         </p>
 
     </footer>
-  <script>
-        // Google OAuth logic
-        function handleClientLoad() {
-            gapi.load('client:auth2', initClient);
-        }
-
-        function initClient() {
-    gapi.client.init({
-        clientId: '1031883252330-j3vht1ianq6850l0p78mv3nu2t1f4ks3.apps.googleusercontent.com',
-        scope: 'https://www.googleapis.com/auth/userinfo.email'
-    }).then(() => {
-        const authInstance = gapi.auth2.getAuthInstance();
-        
-        // Check if the user is already signed in
-        if (authInstance.isSignedIn.get()) {
-            checkUserPayment(authInstance); // If signed in, check payment
-        } else {
-            // Show the login modal
-            document.getElementById('loginModal').style.display = 'flex';
-        }
-
-        // Handle login button click
-        document.getElementById('loginWithGoogle').onclick = () => {
-            authInstance.signIn().then(() => {
-                checkUserPayment(authInstance); // Check payment after sign-in
-                document.getElementById('loginModal').style.display = 'none'; // Hide modal
-            });
-        };
-
-        // Close modal button
-        document.getElementById('closeModal').onclick = () => {
-            document.getElementById('loginModal').style.display = 'none';
-        };
-    }).catch(error => {
-        console.error('Error during Google API initialization:', error);
-    });
-}
-
-
-        function checkUserPayment(authInstance) {
-            const userProfile = authInstance.currentUser.get();
-            const userId = userProfile.getId(); // Get Google user ID
-
-            // Check payment status via backend
-            fetch(`https://techpalettementorback-710cc139297d.herokuapp.com/check-token/${userId}`)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.hasPaid) {
-                        console.log('User has paid. Grant access to the app.');
-                        loadAppFeatures(); // Load app features if the user has paid
-                    } else {
-                        console.error('User has not paid.');
-                        document.getElementById('stripeCheckoutBtn').style.display = 'block'; // Show Stripe button
-                    }
-                })
-                .catch(error => {
-                    console.error('Error checking payment status:', error);
-                });
-        }
-
-        function loadAppFeatures() {
-            console.log('Loading app features...');
-  
-
-    // Show all control elements
-    document.getElementById('controls').style.display = 'flex'; // Ensure controls are visible
-    document.getElementById('palette').style.display = 'block'; // Show palette if applicable
-
-    // Image upload logic
-    const imageUpload = document.getElementById('imageUpload');
-    imageUpload.addEventListener('change', (event) => {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                // Logic to handle image data
-                const imgElement = new Image();
-                imgElement.src = e.target.result;
-                // Add the image to canvas or perform required operations
-            };
-            reader.readAsDataURL(file);
-        }
-    });
-
-    // Initialize drawing aids
-    document.getElementById('toggleDrawingAids').addEventListener('click', () => {
-        const aids = document.getElementById('drawingAids');
-        aids.style.display = aids.style.display === 'none' ? 'block' : 'none';
-    });
-
-    // Set up color selection and hex value display
-    const colorInputs = document.querySelectorAll('input[type="color"]');
-    colorInputs.forEach(input => {
-        input.addEventListener('input', (event) => {
-            const hexValue = event.target.value;
-            document.getElementById('hexValue').innerText = `Hex Value: ${hexValue}`;
-            document.getElementById('colorDisplay').style.backgroundColor = hexValue;
-        });
-    });
-
-    // Implement blending functionality
-    document.getElementById('blendCount').addEventListener('input', (event) => {
-        const blendCount = event.target.value;
-        // Logic to blend colors based on selected count
-    });
-
-}
-
-        }
-
-        // Stripe Payment Setup
-        var stripe = Stripe('pk_live_51QAUaLIcCV1uZ856dNizRkc41p6GdHdxSpa91BcPfVLthFKC79e1zqyP169SsTkmQunQLCGeCFqZlIWYOeeFFcoA003NXZ8J1V');
-        document.getElementById('stripeCheckoutBtn').addEventListener('click', function () {
-            fetch('https://techpalettementorback-710cc139297d.herokuapp.com/create-checkout-session', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            })
-            .then(response => response.json())
-            .then(session => {
-                return stripe.redirectToCheckout({ sessionId: session.id });
-            })
-            .then(result => {
-                if (result.error) {
-                    alert(result.error.message);
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-        });
-
-        // Initialize Google OAuth
-        document.addEventListener('DOMContentLoaded', handleClientLoad);
-    </script>
-	window.location.href = 'app.html';
+<!-- Code injected by live-server -->
+<script type="text/javascript">
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function() {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					head.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					head.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function(msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			console.log('Live reload enabled.');
+		})();
+	}
+	// ]]>
+</script>
 </body>
 </html>
