@@ -164,10 +164,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/tinycolor2@1.4.2/dist/tinycolor-min.js"></script>
     <script src="renderer.js"></script>
-
-    <div id="app-content" style="display: none;"> 
-        <!-- Your app content goes here --> 
-    </div>
+    <script src="controls.js"></script>
 
     <script src="https://apis.google.com/js/api.js" onload="onLoad()"></script>
     <script>
@@ -212,9 +209,8 @@
             const validUsers = await response.json();
 
             if (validUsers.includes(userEmail)) {
-                // Access granted, show app content
-                document.getElementById('app-content').style.display = 'block';
-                // You can also initialize your app here
+                // Access granted, you can initialize your app here
+                document.getElementById('canvas-container').style.display = 'block'; // Show canvas and controls
             } else {
                 // Redirect to purchase page
                 window.location.href = 'purchase.html';
@@ -232,11 +228,8 @@
             <a href="PrivacyPolicy.html">Privacy Policy</a> |
             <a href="LegalDisclaimer.html">Legal Disclaimer</a> |
             <a href="ContactUs.html">Contact Us</a> |
-            <a href="https://www.instagram.com/techpalettementor"><img src="instagram.png" alt="Instagram" style="width:14px;height:14px;"></a>
-            <a href="https://www.pinterest.com/techpalettementor/"><img src="pinterest.png" alt="Pinterest" style="width:14px;height:14px;"></a>
+            <a href="https://www.instagram.com/techpalettementor"><img src="instagram.png" alt="Instagram"></a>
         </p>
     </footer>
-    <script src="controls.js"></script>
-
 </body>
 </html>
