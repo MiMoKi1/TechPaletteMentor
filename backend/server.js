@@ -1,9 +1,7 @@
-// server.js
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -13,6 +11,7 @@ app.use(bodyParser.json());
 
 // In-memory store for tokens (for demonstration only)
 const tokensStore = {};
+const paymentsStore = {}; // Store for payments
 
 // Generate a unique token
 const generateToken = () => {
@@ -35,9 +34,26 @@ app.post('/pay', async (req, res) => {
         const token = generateToken();
         tokensStore[userId] = token; // Use userId to link token to the user
 
+        // Store payment status
+        paymentsStore[userId] = { hasPaid: true }; // Assume payment was successful
+
         res.json({ payment, token }); // Send the token back to the client
     } catch (error) {
         res.status(500).send(error);
+    }
+});
+
+// Endpoint to check if the user has paid
+app.get('/check-payment/:userId', (req, res) => {
+    const userId = req.params.userId;
+
+    // Check if the user has paid
+    const userPayment = paymentsStore[userId];
+
+    if (userPayment && userPayment.hasPaid) {
+        res.json({ hasPaid: true });
+    } else {
+        res.json({ hasPaid: false });
     }
 });
 
