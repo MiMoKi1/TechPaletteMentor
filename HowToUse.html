@@ -1,1 +1,290 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/x-icon" href="http://127.0.0.1:8080/favicon.ico">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <title>How to Use Tech Palette Mentor</title>
+
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            margin: 0;
+            height: 100vh;
+	   background-color: #FFFFFF;
+ font-size: 12px; /* Reduced font size */
+        }
+        #header {
+            text-align: center;
+            margin: 10px 0;
+            font-family: Poppins, sans-serif;
+            font-size: 26px;
+            color: #888888;
+            padding: 4px;
+            background-color: #FFFFFF;
+        }
+        #logo {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 100px;
+            height: auto;
+            z-index: 100;
+        }
+        .content {
+            margin: 30px;
+            font-family: Poppins, sans-serif;
+            font-size: 16px;
+            color: #333;
+            text-align: justify;
+            line-height: 1.6;
+        }
+        .content h1 {
+            font-size: 24px;
+            color: #8B5B29;
+        }
+        footer {
+            margin-top: auto;
+            text-align: center;
+            padding: 10px 0;
+            background-color: #FFFFFF;
+            position: relative;
+        }
+        footer a {
+            color: black;
+            text-decoration: none;
+            margin: 0 10px;
+	        font-size: 10px;
+            transition: color 0.3s ease, font-weight 0.3s ease;
+        }
+        footer a:hover {
+            font-weight: bold;
+        }
+        footer a:active {
+            color: white;
+        }
+        footer a:visited {
+            color: black;
+        }
+        footer img {
+            width: 24px;
+            height: 24px;
+            margin: 0 10px;
+        }
+        .rights-reserved {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 10px;
+        }
+      /* Menu Icon (Moved to the top-right) */
+#menu-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px; /* Move to the right side */
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+#menu-icon:hover {
+    transform: scale(1.1);
+    filter: brightness(1.2);
+}
+
+/* Dropdown Menu (Moved under the icon on the right) */
+.dropdown {
+    position: absolute;
+    top: 60px; /* Position dropdown slightly below the icon */
+    right: 10px; /* Align dropdown to the right */
+    background-color: #FAF2E2;
+    border: 1px solid #8B5B29;
+    border-radius: 5px;
+    display: none;
+    flex-direction: column;
+    width: 160px;
+    padding: 5px;
+}
+
+.dropdown a {
+    text-decoration: none;
+    color: #8B5B29;
+    padding: 10px;
+    display: block;
+    transition: background-color 0.3s ease, font-weight 0.3s ease;
+}
+
+.dropdown a:hover {
+    background-color: #8B5B29;
+    color: white;
+    font-weight: bold;
+}
+
+#menu-icon.active + .dropdown {
+    display: flex;
+}
+
+/* Purchase button styles */
+form {
+    text-align: center;
+}
+
+button {
+    background-color: #FF6F61; /* Cute pink color */
+    color: white;
+    border: none;
+    border-radius: 12px; /* Rounded corners */
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    position: relative;
+    overflow: hidden; /* To contain the pseudo-element */
+    transition: transform 0.3s;
+}
+
+button::before {
+    content: '❤️'; /* Heart symbol */
+    position: absolute;
+    left: 84px; /* Adjusted left position */
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px; /* Heart size */
+    opacity: 0.7; /* Slightly transparent */
+}
+
+button:hover {
+    background-color: #FF4C4C; /* Darker pink on hover */
+    transform: scale(1.05); /* Slight scale on hover */
+}
+
+
+    </style>
+</head>
+<body>
+
+<!-- Menu Icon -->
+        <img id="menu-icon" src="menu.png" alt="Menu Icon">
+
+        <!-- Dropdown Menu -->
+        <div class="dropdown">
+    <a href="index.html">Home</a>
+    <a href="AboutUs.html">About Us</a>
+    <a href="HowToUse.html">How to Use</a>
+    <a href="buynow.html">Buy</a>
+ <a href="ContactUs.html">Contact Us</a>
+        </div>
+
+
+    <div id="header">How to Use Tech Palette Mentor</div>
+ <a href="index.html"> <!-- Change 'index.html' to your homepage URL if different -->
+    <img id="logo" src="palettementor100x100transp.png" alt="Tech Palette Mentor Logo">
+</a>
+<video controls style="max-width: 50%; height: auto; margin-top: 20px;">
+    <source src="HowToUseTechPaletteMentor.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+
+
+    <div class="content">
+<div>
+    <h2>How to Use Tech Palette Mentor</h2>
+
+    <h3>Uploading Images</h3>
+    <p><strong>Step 1: Select Your Image</strong><br>
+        To begin, you’ll need to upload an image that you want to analyse for colour blending. <strong>Tech Palette Mentor</strong> accepts various image file types, including:
+    </p>
+    <ul>
+        <li><strong>JPEG/JPG</strong>: Ideal for photographs and realistic images. The typical file size should be under 5 MB for optimal performance.</li>
+        <li><strong>PNG</strong>: Perfect for images requiring transparency and clear colours. Keep your file size below 5 MB for faster uploads.</li>
+        <li><strong>GIF</strong>: Useful for simple graphics and animations, although these may not provide the best colour data.</li>
+    </ul>
+
+<section id="purchase">
+    <form action="your_stripe_link_here" method="POST">
+        <button type="submit">Buy Now</button>
+    </form>
+</section>
+
+
+
+
+    <p><strong>Step 2: Drag and Drop or Click to Upload</strong><br>
+        You can easily upload your image by either dragging and dropping it into the designated area on the app or clicking the upload button to select a file from your device.
+    </p>
+
+    <p><strong>Step 3: Confirm Your Upload</strong><br>
+        Once your image is uploaded, it will appear on the screen, allowing you to confirm that it is the correct file. This process ensures that your image is ready for analysis.
+    </p>
+
+    <h3>Understanding File Size and Type Considerations</h3>
+    <p>
+        <strong>File Size</strong>: Aim to keep your image file size under 5 MB. Larger files may slow down processing times and could be rejected by the system.<br>
+        <strong>File Type</strong>: The supported file types (JPEG, PNG, GIF) ensure that images maintain their quality while being processed for colour analysis.
+    </p>
+
+    <h3>Unique Colour Blending Feature</h3>
+    <p>
+        One of the standout features of <strong>Tech Palette Mentor</strong> is its ability to provide personalised colour blending suggestions based on your actual paint inventory. Here’s how it works:
+    </p>
+    <p><strong>Step 1: Input Your Paint Inventory</strong><br>
+        Enter the colours of the paints you currently have in your collection. This unique feature allows <strong>Tech Palette Mentor</strong> to offer blending suggestions that are not only practical but also tailored to the paints you already own.
+    </p>
+
+    <p><strong>Step 2: Analyse the Uploaded Image</strong><br>
+        Once the image is uploaded, <strong>Tech Palette Mentor</strong> analyses its colour composition. The app extracts the dominant colours from your image and matches them with the paint colours in your inventory.
+    </p>
+
+
+<section id="purchase">
+    <form action="your_stripe_link_here" method="POST">
+        <button type="submit">Buy Now</button>
+    </form>
+</section>
+
+
+    <p><strong>Step 3: Get Personalised Blends</strong><br>
+        Based on the analysis, the app will generate a list of blending suggestions, showing you how to recreate the colours present in your uploaded image using your specific paints. This allows you to experiment with your palette and create unique blends without needing to purchase additional colours.
+    </p>
+
+    <h3>Conclusion</h3>
+    <p>
+        <strong>Tech Palette Mentor</strong> is a one-of-a-kind tool that bridges the gap between traditional art supplies and modern technology. By allowing users to input their paint inventory and receive tailored blending suggestions, it empowers artists to explore colour theory and experiment creatively. The ability to upload images easily and obtain personalised results sets <strong>Tech Palette Mentor</strong> apart, making it an invaluable resource for artists of all levels.
+    </p>
+</div>
+
+
+
+
+<script>
+        const menuIcon = document.getElementById("menu-icon");
+        const dropdown = document.querySelector(".dropdown");
+
+        menuIcon.addEventListener("click", () => {
+            menuIcon.classList.toggle("active");
+            dropdown.classList.toggle("active");
+        });
+    </script>
+
+
+    <footer>
+        <p>
+            © 2024 Tech Palette Mentor. All Rights Reserved.
+            <a href="TermsandConditions.html">Terms and Conditions</a> |
+            <a href="PrivacyPolicy.html">Privacy Policy</a> |
+            <a href="LegalDisclaimer.html">Legal Disclaimer</a> |
+            <a href="ContactUs.html">Contact Us</a> |
+            <a href="https://www.instagram.com/techpalettementor"><img src="instagram.png" alt="Instagram"></a> |
+            <a href="https://www.pinterest.com/techpalettementor/"><img src="pinterest.png" alt="Pinterest"></a> |
+            <a href="https://www.linkedin.com/company/techpalettementor/"><img src="linkedin.png" alt="LinkedIn"></a>
+        </p>
+    </footer>
+</body>
+</html>
