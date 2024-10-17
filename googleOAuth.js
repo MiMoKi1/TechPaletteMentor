@@ -37,7 +37,8 @@ function checkUserPayment(authInstance) {
     const userId = userProfile.getId(); // Get the user's Google ID
 
     // Fetch from your Heroku backend to check if the user has paid
-    fetch(`https://techpalettementorback-710cc139297d.herokuapp.com//check-payment/${userId}`)
+    fetch(`https://techpalettementorback-710cc139297d.herokuapp.com/check-token/${userId}`)
+
         .then(response => response.json())
         .then(data => {
             if (data.hasPaid) {
