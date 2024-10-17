@@ -3,6 +3,7 @@ const CLIENT_ID = '1031883252330-j3vht1ianq6850l0p78mv3nu2t1f4ks3.apps.googleuse
 const SCOPES = 'https://www.googleapis.com/auth/userinfo.email';
 const REDIRECT_URI = 'https://techpalettementorback-710cc139297d.herokuapp.com/'; // Heroku redirect URI
 
+
 // Load the API client and auth2 library
 function handleClientLoad() {
     gapi.load('client:auth2', initClient);
