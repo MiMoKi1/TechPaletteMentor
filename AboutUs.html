@@ -238,13 +238,15 @@ button:hover {
             dropdown.classList.toggle("active");
         });
     </script>
-<section id="purchase">
-    <h2>Get Access</h2>
-    <p>Unlock the full potential of Tech Palette Mentor by purchasing access to our exclusive features.</p>
-    <form action="your_stripe_link_here" method="POST">
-        <button type="submit">Buy Now</button>
-    </form>
-</section>
+<div style="text-align: center;">
+  <script async src="https://js.stripe.com/v3/buy-button.js"></script>
+  
+  <stripe-buy-button
+    buy-button-id="buy_btn_1QApqKIcCV1uZ856vlMNlS3k"
+    publishable-key="pk_live_51QAUaLIcCV1uZ856dNizRkc41p6GdHdxSpa91BcPfVLthFKC79e1zqyP169SsTkmQunQLCGeCFqZlIWYOeeFFcoA003NXZ8J1V"
+  ></stripe-buy-button>
+</div>
+
 
 
 <footer>
