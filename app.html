@@ -2,6 +2,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+	<script>
+    function onLoad() {
+        handleClientLoad(); // Call this function to load the Google client
+    }
+</script>
+
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,7 +27,8 @@
 
     <script src="https://js.stripe.com/v3/"></script> <!-- Stripe JS -->
 
-    <script src="https://apis.google.com/js/api.js"></script> <!-- Google API JS -->
+<script src="https://apis.google.com/js/api.js?onload=onLoad"></script>
+
 
 	
     <style>
@@ -435,8 +443,7 @@
 
         function loadAppFeatures() {
             console.log('Loading app features...');
-        function loadAppFeatures() {
-    console.log('Loading app features...');
+  
 
     // Show all control elements
     document.getElementById('controls').style.display = 'flex'; // Ensure controls are visible
@@ -480,10 +487,6 @@
         // Logic to blend colors based on selected count
     });
 
-    // Palette functionality (this could be more complex depending on your needs)
-    // Show existing colors in the palette and set up selection logic
-
-    // Additional logic for other controls as needed
 }
 
         }
@@ -514,6 +517,6 @@
         // Initialize Google OAuth
         document.addEventListener('DOMContentLoaded', handleClientLoad);
     </script>
-	
+	window.location.href = 'app.html';
 </body>
 </html>
