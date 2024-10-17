@@ -10,21 +10,18 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(bodyParser.json());
 
-// Endpoint to check payment status
-app.get('/check-payment/:userId', async (req, res) => {
-    const userId = req.params.userId;
+// In-memory store for tokens (for demonstration only)
+const tokensStore = {};
 
-    // Logic to check if the user has paid, e.g., query your database
-    // For simplicity, let's assume the user has paid if they have a specific ID
-    const hasPaid = userId === 'VALID_USER_ID'; // Replace with your actual logic
+// Generate a unique token
+const generateToken = () => {
+    return Math.random().toString(36).substring(2);
+};
 
-    res.json({ hasPaid });
-});
-
-// Endpoint to handle Stripe payment
+// Endpoint to handle Stripe payment and generate a token
 app.post('/pay', async (req, res) => {
     try {
-        const { amount, paymentMethodId } = req.body;
+        const { amount, paymentMethodId, userId } = req.body;
 
         const payment = await stripe.paymentIntents.create({
             amount,
@@ -33,12 +30,27 @@ app.post('/pay', async (req, res) => {
             confirm: true,
         });
 
-        res.json(payment);
+        // Generate a token and store it
+        const token = generateToken();
+        tokensStore[userId] = token; // Use userId to link token to the user
+
+        res.json({ payment, token }); // Send the token back to the client
     } catch (error) {
         res.status(500).send(error);
     }
 });
 
+// Endpoint to check if the user has access based on the token
+app.get('/check-token/:userId', (req, res) => {
+    const userId = req.params.userId;
+
+    // Check if the user has a valid token
+    const hasAccess = tokensStore[userId] !== undefined;
+
+    res.json({ hasAccess });
+});
+
+// Start the server
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
