@@ -365,10 +365,43 @@
         });
     }
 
-			function checkUserToken() {
-        console.log('Checking user token...');
-        // Your token verification logic here
+function checkUserToken() {
+    const userProfile = auth2.currentUser.get();
+    const userId = userProfile.getId(); // Get the user's Google ID
+    const accessToken = userProfile.getAuthResponse().access_token; // Get the access token
+
+    console.log('Checking user token...');
+
+    // Example of how you might check against a list of valid tokens
+    // This could be a call to a serverless function that checks if the user ID is valid
+    // For simplicity, we're using a local array for valid tokens here
+    const validUsers = [
+        { id: 'USER_GOOGLE_ID_1' }, // Replace with actual user IDs
+        { id: 'USER_GOOGLE_ID_2' }
+        // Add more user IDs as needed
+    ];
+
+    // Check if the user ID is in the list of valid users
+    const isValidUser = validUsers.some(user => user.id === userId);
+
+    if (isValidUser) {
+        console.log('Access granted. User is valid.');
+        // Redirect to your app or load app features
+        loadAppFeatures();
+    } else {
+        console.error('Access denied. User is not valid.');
+        // Optionally, display an error message to the user
+        alert('Access denied. Please purchase access to the app.');
+        // Optionally, sign out the user
+        auth2.signOut();
     }
+}
+
+function loadAppFeatures() {
+    // Logic to load app features, like displaying the drawing aids and palette
+    console.log('Loading app features...');
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     initGoogleAuth();
 });
