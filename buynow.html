@@ -50,22 +50,30 @@
             margin-bottom: 10px;
         }
 
-        /* Move button to right of the screen */
+        /* Purchase button styles */
+        form {
+            text-align: center;
+            margin: 20px 0;
+        }
+
         button {
             background-color: #8B5B29;
             color: white;
             border: none;
             padding: 10px 20px;
             cursor: pointer;
-            position: absolute;
-            right: 20px; /* Move to the right of the screen */
-            top: 50%; /* Position vertically in the middle of the section */
-            transform: translateY(-50%);
             transition: background-color 0.3s;
         }
 
         button:hover {
             background-color: #a86535;
+        }
+
+        /* Stripe button wrapper styles */
+        .stripe-button-wrapper {
+            display: flex;
+            justify-content: flex-end; /* Align the button to the right */
+            padding: 20px 0; /* Add some vertical padding */
         }
 
         /* Footer styles */
@@ -138,62 +146,79 @@
 </head>
 <body>
 
-<!-- Menu Icon -->
-        <img id="menu-icon" src="menu.png" alt="Menu Icon">
+    <!-- Menu Icon -->
+    <img id="menu-icon" src="menu.png" alt="Menu Icon">
 
-        <!-- Dropdown Menu -->
-        <div class="dropdown">
-            <a href="index.html">Home</a>
-            <a href="AboutUs.html">About Us</a>
-            <a href="HowToUse.html">How to Use</a>
-            <a href="buynow.html">Buy</a>
-            <a href="app.html">Web App</a>
-            <a href="ContactUs.html">Contact Us</a>
+    <!-- Dropdown Menu -->
+    <div class="dropdown">
+        <a href="index.html">Home</a>
+        <a href="AboutUs.html">About Us</a>
+        <a href="HowToUse.html">How to Use</a>
+        <a href="buynow.html">Buy</a>
+        <a href="app.html">Web App</a>
+        <a href="ContactUs.html">Contact Us</a>
+    </div>
+
+    <!-- Header -->
+    <div id="header">
+        <a href="index.html">
+            <img id="logo" src="palettementor100x100transp.png" alt="Tech Palette Mentor Logo">
+        </a>
+    </div>
+
+    <header>
+        <h1>Unlock Your Creative Potential with Tech Palette Mentor</h1>
+    </header>
+
+    <section id="sales-pitch">
+        <h2>Transform Your Artistic Journey</h2>
+        <p>Are you an artist looking to elevate your work? Tech Palette Mentor is the ultimate tool that empowers you to blend colours like never before, using your actual paint inventory to create stunning visuals.</p>
+
+        <p>Say goodbye to guesswork and hello to precision! With our unique blending algorithm, you can recreate any image using the paints you already own. This tool is designed to make art more accessible and enjoyable.</p>
+    </section>
+
+    <section id="features">
+        <h2>Why Choose Tech Palette Mentor?</h2>
+        <p>Our app provides:</p>
+        <ul>
+            <li>Real-time blending suggestions based on your personal paint inventory.</li>
+            <li>Intuitive interface for easy navigation and usage.</li>
+            <li>Experiment with colour theory to enhance your skills.</li>
+            <li>Support for various file types, making it versatile for all your needs.</li>
+        </ul>
+
+        <!-- Stripe Button Wrapper -->
+        <div class="stripe-button-wrapper">
+            <script async src="https://js.stripe.com/v3/buy-button.js"></script>
+
+            <stripe-buy-button
+              buy-button-id="buy_btn_1QApqKIcCV1uZ856vlMNlS3k"
+              publishable-key="pk_live_51QAUaLIcCV1uZ856dNizRkc41p6GdHdxSpa91BcPfVLthFKC79e1zqyP169SsTkmQunQLCGeCFqZlIWYOeeFFcoA003NXZ8J1V"
+            >
+            </stripe-buy-button>
         </div>
+    </section>
 
+    <script>
+        const menuIcon = document.getElementById("menu-icon");
+        const dropdown = document.querySelector(".dropdown");
 
-<!-- Header -->
-<div id="header">
-    <a href="index.html">
-        <img id="logo" src="palettementor100x100transp.png" alt="Tech Palette Mentor Logo">
-    </a>
-</div>
+        menuIcon.addEventListener("click", () => {
+            menuIcon.classList.toggle("active");
+            dropdown.classList.toggle("active");
+        });
+    </script>
 
-<header>
-    <h1>Unlock Your Creative Potential with Tech Palette Mentor</h1>
-</header>
-
-<section id="sales-pitch">
-    <h2>Transform Your Artistic Journey</h2>
-    <p>Are you an artist looking to elevate your work? Tech Palette Mentor is the ultimate tool that empowers you to blend colours like never before, using your actual paint inventory to create stunning visuals.</p>
-
-    <p>Say goodbye to guesswork and hello to precision! With our unique blending algorithm, you can recreate any image using the paints you already own. This tool is designed to make art more accessible and enjoyable.</p>
-
-    <!-- Purchase button -->
-    <button>Purchase Now</button>
-
-</section>
-
-<script>
-    const menuIcon = document.getElementById("menu-icon");
-    const dropdown = document.querySelector(".dropdown");
-
-    menuIcon.addEventListener("click", () => {
-        menuIcon.classList.toggle("active");
-        dropdown.classList.toggle("active");
-    });
-</script>
-
-<!-- Footer -->
-<footer>
-    <p>&copy; 2024 Tech Palette Mentor. All rights reserved.</p>
-    <p>
-        <a href="TermsandConditions.html">T&C</a> |
-        <a href="PrivacyPolicy.html">Privacy Policy</a> |
-        <a href="ContactUs.html">Contact Us</a> |
-        <a href="index.html">Back to Home</a>
-    </p>
-</footer>
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Tech Palette Mentor. All rights reserved.</p>
+        <p>
+            <a href="TermsandConditions.html">T&C</a> |
+            <a href="PrivacyPolicy.html">Privacy Policy</a> |
+            <a href="ContactUs.html">Contact Us</a> |
+            <a href="index.html">Back to Home</a>
+        </p>
+    </footer>
 
 </body>
 </html>
