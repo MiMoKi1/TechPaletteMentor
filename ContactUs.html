@@ -206,12 +206,15 @@ button:hover {
     <p>The Tech Palette Mentor logo and all related content, including but not limited to the software code, designs, and graphics, are the intellectual property of Tech Palette Mentor. Unauthorized use, reproduction, or distribution of any part of this website is prohibited.For inquiries regarding licensing or permissions, please contact us at <a href="mailto:mentorpalette@gmail.com">mentorpalette@gmail.com</a>.</p>
 </div>
 
-<section id="purchase">
-    <p>Unlock the full potential of Tech Palette Mentor by purchasing access to our exclusive features.</p>
-    <form action="your_stripe_link_here" method="POST">
-        <button type="submit">Buy Now</button>
-    </form>
-</section>
+<div style="text-align: center;">
+  <script async src="https://js.stripe.com/v3/buy-button.js"></script>
+  
+  <stripe-buy-button
+    buy-button-id="buy_btn_1QApqKIcCV1uZ856vlMNlS3k"
+    publishable-key="pk_live_51QAUaLIcCV1uZ856dNizRkc41p6GdHdxSpa91BcPfVLthFKC79e1zqyP169SsTkmQunQLCGeCFqZlIWYOeeFFcoA003NXZ8J1V"
+  ></stripe-buy-button>
+</div>
+
 
 <script>
         const menuIcon = document.getElementById("menu-icon");
