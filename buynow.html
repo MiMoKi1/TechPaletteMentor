@@ -204,7 +204,7 @@ button:hover {
 <section id="sales-pitch">
     <h2>Transform Your Artistic Journey</h2>
     <p>Are you an artist looking to elevate your work? Tech Palette Mentor is the ultimate tool that empowers you to blend colours like never before, using your actual paint inventory to create stunning visuals.</p>
-    <form action="your_stripe_link_here" method="POST">
+    <form action="https://buy.stripe.com/5kA7v5eBW35AgdGdQQ" method="POST">
         <button type="submit">Buy Now</button>
     </form>
     <p>Say goodbye to guesswork and hello to precision! With our unique blending algorithm, you can recreate any image using the paints you already own. This tool is designed to make art more accessible and enjoyable.</p>
@@ -219,18 +219,20 @@ button:hover {
         <li>Experiment with colour theory to enhance your skills.</li>
         <li>Support for various file types, making it versatile for all your needs.</li>
     </ul>
-    <form action="your_stripe_link_here" method="POST">
+    <form action="https://buy.stripe.com/5kA7v5eBW35AgdGdQQ" method="POST">
         <button type="submit">Buy Now</button>
     </form>
 </section>
 
-<section id="purchase">
-    <h2>Get Started Today!</h2>
-    <p>Unlock the full potential of your artistic abilities and revolutionize your painting process. Join a community of artists who are already experiencing the benefits of Tech Palette Mentor.</p>
-    <form action="your_stripe_link_here" method="POST">
-        <button type="submit">Buy Now</button>
-    </form>
-</section>
+<script async
+  src="https://js.stripe.com/v3/buy-button.js">
+</script>
+
+<stripe-buy-button
+  buy-button-id="buy_btn_1QApqKIcCV1uZ856vlMNlS3k"
+  publishable-key="pk_live_51QAUaLIcCV1uZ856dNizRkc41p6GdHdxSpa91BcPfVLthFKC79e1zqyP169SsTkmQunQLCGeCFqZlIWYOeeFFcoA003NXZ8J1V"
+>
+</stripe-buy-button>
 
 <script>
         const menuIcon = document.getElementById("menu-icon");
