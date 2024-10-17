@@ -339,7 +339,8 @@
 
 
 		<script>
-    let auth2;
+let auth2;
+let userHasPaid = false; // Flag to check payment status
 
     function initGoogleAuth() {
         gapi.load('auth2', function() {
@@ -347,7 +348,8 @@
                 client_id: '1031883252330-j3vht1ianq6850l0p78mv3nu2t1f4ks3.apps.googleusercontent.com', 
                 scope: 'profile email'
             });
-            auth2.isSignedIn.listen(updateSigninStatus);
+        auth2.isSignedIn.listen(updateSigninStatus);
+        checkUserToken(); // Check user token on load
         });
     }
 
@@ -356,6 +358,7 @@
             // User is signed in
             // Call your function to check token or allow access
             console.log('User is signed in');
+	    checkUserPayment(); // Check if user has pai
         } else {
             // User is not signed in
             handleAuthClick();
@@ -365,51 +368,44 @@
     function handleAuthClick() {
         auth2.signIn().then(function() {
             console.log('User signed in');
-            checkUserToken(); 
+            checkUserPayment(); // Check if user has paid
         });
     }
 
-function checkUserToken() {
+function checkUserPayment() {
+   
     const userProfile = auth2.currentUser.get();
     const userId = userProfile.getId(); // Get the user's Google ID
-    const accessToken = userProfile.getAuthResponse().access_token; // Get the access token
 
-    console.log('Checking user token...');
-
-    // Example of how you might check against a list of valid tokens
-    // This could be a call to a serverless function that checks if the user ID is valid
-    // For simplicity, we're using a local array for valid tokens here
-    const validUsers = [
-        { id: 'USER_GOOGLE_ID_1' }, // Replace with actual user IDs
-        { id: 'USER_GOOGLE_ID_2' }
-        // Add more user IDs as needed
-    ];
-
-    // Check if the user ID is in the list of valid users
-    const isValidUser = validUsers.some(user => user.id === userId);
-
-    if (isValidUser) {
-        console.log('Access granted. User is valid.');
-        // Redirect to your app or load app features
-        loadAppFeatures();
-    } else {
-        console.error('Access denied. User is not valid.');
-        // Optionally, display an error message to the user
-        alert('Access denied. Please purchase access to the app.');
-        // Optionally, sign out the user
-        auth2.signOut();
-    }
+    // Example of a payment check function; you may need to implement this serverless function
+    fetch(`YOUR_SERVERLESS_FUNCTION_URL?userId=${userId}`)
+        .then(response => response.json())
+        .then(data => {
+            userHasPaid = data.hasPaid; // Assume your server returns { hasPaid: true/false }
+            if (userHasPaid) {
+                loadAppFeatures(); // Load features if paid
+            } else {
+                console.error('Access denied. User has not paid.');
+                alert('Access denied. Please purchase access to the app.');
+                auth2.signOut(); // Optionally sign out the user
+            }
+        })
+        .catch(error => {
+            console.error('Error checking payment status:', error);
+        });
 }
 
 function loadAppFeatures() {
-    // Logic to load app features, like displaying the drawing aids and palette
+    // Show your canvas and controls here
+    document.getElementById('canvas-container').style.display = 'block'; // Assuming your canvas is hidden initially
     console.log('Loading app features...');
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Hide app features initially
+    document.getElementById('canvas-container').style.display = 'none';
     initGoogleAuth();
 });
-
 </script>
 
 
