@@ -61,7 +61,7 @@ app.get('/check-payment/:userId', (req, res) => {
 app.get('/check-token/:userId', (req, res) => {
     const userId = req.params.userId;
 
-    // Check if the user has a valid token
+    // Check if the user has a valid token (e.g., stored in a database)
     const hasAccess = tokensStore[userId] !== undefined;
 
     res.json({ hasAccess });
