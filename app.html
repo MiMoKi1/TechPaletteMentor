@@ -400,7 +400,57 @@
 
         function loadAppFeatures() {
             console.log('Loading app features...');
-            // Logic to display app features goes here
+        function loadAppFeatures() {
+    console.log('Loading app features...');
+
+    // Show all control elements
+    document.getElementById('controls').style.display = 'flex'; // Ensure controls are visible
+    document.getElementById('palette').style.display = 'block'; // Show palette if applicable
+
+    // Image upload logic
+    const imageUpload = document.getElementById('imageUpload');
+    imageUpload.addEventListener('change', (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                // Logic to handle image data
+                const imgElement = new Image();
+                imgElement.src = e.target.result;
+                // Add the image to canvas or perform required operations
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    // Initialize drawing aids
+    document.getElementById('toggleDrawingAids').addEventListener('click', () => {
+        const aids = document.getElementById('drawingAids');
+        aids.style.display = aids.style.display === 'none' ? 'block' : 'none';
+    });
+
+    // Set up color selection and hex value display
+    const colorInputs = document.querySelectorAll('input[type="color"]');
+    colorInputs.forEach(input => {
+        input.addEventListener('input', (event) => {
+            const hexValue = event.target.value;
+            document.getElementById('hexValue').innerText = `Hex Value: ${hexValue}`;
+            document.getElementById('colorDisplay').style.backgroundColor = hexValue;
+        });
+    });
+
+    // Implement blending functionality
+    document.getElementById('blendCount').addEventListener('input', (event) => {
+        const blendCount = event.target.value;
+        // Logic to blend colors based on selected count
+    });
+
+    // Palette functionality (this could be more complex depending on your needs)
+    // Show existing colors in the palette and set up selection logic
+
+    // Additional logic for other controls as needed
+}
+
         }
 
         // Stripe Payment Setup
