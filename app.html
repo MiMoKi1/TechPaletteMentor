@@ -1,13 +1,13 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	 <link rel="icon" type="image/x-icon" href="http://127.0.0.1:8080/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="http://127.0.0.1:8080/favicon.ico">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <title>Tech Palette Mentor</title>
-    <script src="https://apis.google.com/js/api.js"></script>
-    <script src="googleOAuth.js"></script>
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4YZ8N3B9R7"></script>
     <script>
@@ -17,7 +17,6 @@
         gtag('config', 'G-4YZ8N3B9R7');
     </script>
 
-	
     <style>
         body {
             display: flex;
@@ -48,10 +47,6 @@
             z-index: 100;
         }
         #canvas-container {
-		#canvas-container {
-    display: none; /* Initially hidden */
-}
-
             width: 100%;
             height: 100%;
             position: relative;
@@ -254,8 +249,6 @@
     </style>
 </head>
 <body>
-<body onload="initGoogleAuth()">
-
     <div id="canvas-container">
         <div id="header">palette mentor</div>
       <a href="index.html"> <!-- Change 'index.html' to your homepage URL if different -->
@@ -272,6 +265,7 @@
     <a href="AboutUs.html">About Us</a>
     <a href="HowToUse.html">How to Use</a>
     <a href="buynow.html">Buy</a>
+    <a href="App.html">Web App</a>
  <a href="ContactUs.html">Contact Us</a>
         </div>
 
@@ -334,77 +328,6 @@
         });
     </script>
 
-
-		<script>
-let auth2;
-let userHasPaid = false; // Flag to check payment status
-
-    function initGoogleAuth() {
-        gapi.load('auth2', function() {
-            auth2 = gapi.auth2.init({
-                client_id: '1031883252330-j3vht1ianq6850l0p78mv3nu2t1f4ks3.apps.googleusercontent.com', 
-                scope: 'profile email'
-            });
-        auth2.isSignedIn.listen(updateSigninStatus);
-                updateSigninStatus(auth2.isSignedIn.get());
-        });
-    }
-
-    function updateSigninStatus(isSignedIn) {
-        if (isSignedIn) {
-            console.log('User is signed in');
-	    checkUserPayment(); // Check if user has pai
-        } else {
-            // User is not signed in
-            handleAuthClick();
-        }
-    }
-
-    function handleAuthClick() {
-        auth2.signIn().then(function() {
-            console.log('User signed in');
-            checkUserPayment(); // Check if user has paid
-        });
-    }
-
-function checkUserPayment() {
-    const userProfile = auth2.currentUser.get();
-    const userId = userProfile.getId(); // Get the user's Google ID
- const accessToken = userProfile.getAuthResponse().access_token; // Get the access token
-
-	
-    fetch(`https://techpalettementorback-710cc139297d.herokuapp.com/?userId=${userId}`)
-        .then(response => response.json())
-        .then(data => {
-            userHasPaid = data.hasPaid; // Assume your server returns { hasPaid: true/false }
-            if (userHasPaid) {
-                loadAppFeatures(); // Load features if paid
-            } else {
-                console.error('Access denied. User has not paid.');
-                alert('Access denied. Please purchase access to the app.');
-                auth2.signOut(); // Optionally sign out the user
-            }
-        })
-        .catch(error => {
-            console.error('Error checking payment status:', error);
-        });
-}
-
-function loadAppFeatures() {
-    // Show your canvas and controls here
-    document.getElementById('canvas-container').style.display = 'block'; // Assuming your canvas is hidden initially
-    console.log('Loading app features...');
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-    // Hide app features initially
-    document.getElementById('canvas-container').style.display = 'none';
-    initGoogleAuth();
-});
-</script>
-
-
-		
     <footer>
         <p>
 	           © 2024 Palette Mentor. All Rights Reserved.
@@ -418,5 +341,36 @@ document.addEventListener('DOMContentLoaded', function() {
         </p>
 
     </footer>
+<!-- Code injected by live-server -->
+<script type="text/javascript">
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function() {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					head.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					head.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function(msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			console.log('Live reload enabled.');
+		})();
+	}
+	// ]]>
+</script>
 </body>
 </html>
