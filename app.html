@@ -252,6 +252,20 @@
         #menu-icon.active + .dropdown {
             display: flex;
         }
+
+	    #loginModal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000; /* Ensure it appears above other elements */
+}
+
     </style>
 </head>
 <body>
@@ -271,10 +285,17 @@
     <a href="App.html">Web App</a>
  <a href="ContactUs.html">Contact Us</a>
         </div>
+	    
+<!-- Google Login Modal -->
+<div id="loginModal" style="display: none;">
+    <div style="background-color: white; padding: 20px; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);">
+        <h3>Login Required</h3>
+        <p>Please log in with Google to access this application.</p>
+        <button id="loginWithGoogle">Log in with Google</button>
+        <button id="closeModal">Close</button>
+    </div>
+</div>
 
-
-        <!-- Google Sign-in Button -->
-        <button id="googleSignInBtn">Sign in with Google</button>
 
         <!-- Stripe Checkout Button (will appear if not paid) -->
         <button id="stripeCheckoutBtn" style="display:none;">Buy the App</button>
@@ -359,20 +380,37 @@
         }
 
         function initClient() {
-            gapi.client.init({
-                clientId: 'YOUR_GOOGLE_CLIENT_ID',
-                scope: 'https://www.googleapis.com/auth/userinfo.email'
-            }).then(() => {
-                const authInstance = gapi.auth2.getAuthInstance();
-                document.getElementById('googleSignInBtn').onclick = () => {
-                    authInstance.signIn().then(() => {
-                        checkUserPayment(authInstance);
-                    });
-                };
-            }).catch(error => {
-                console.error('Error during Google API initialization:', error);
-            });
+    gapi.client.init({
+        clientId: 'YOUR_GOOGLE_CLIENT_ID',
+        scope: 'https://www.googleapis.com/auth/userinfo.email'
+    }).then(() => {
+        const authInstance = gapi.auth2.getAuthInstance();
+        
+        // Check if the user is already signed in
+        if (authInstance.isSignedIn.get()) {
+            checkUserPayment(authInstance); // If signed in, check payment
+        } else {
+            // Show the login modal
+            document.getElementById('loginModal').style.display = 'flex';
         }
+
+        // Handle login button click
+        document.getElementById('loginWithGoogle').onclick = () => {
+            authInstance.signIn().then(() => {
+                checkUserPayment(authInstance); // Check payment after sign-in
+                document.getElementById('loginModal').style.display = 'none'; // Hide modal
+            });
+        };
+
+        // Close modal button
+        document.getElementById('closeModal').onclick = () => {
+            document.getElementById('loginModal').style.display = 'none';
+        };
+    }).catch(error => {
+        console.error('Error during Google API initialization:', error);
+    });
+}
+
 
         function checkUserPayment(authInstance) {
             const userProfile = authInstance.currentUser.get();
