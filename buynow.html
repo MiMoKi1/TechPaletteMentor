@@ -177,27 +177,29 @@
         <p>Say goodbye to guesswork and hello to precision! With our unique blending algorithm, you can recreate any image using the paints you already own. This tool is designed to make art more accessible and enjoyable.</p>
     </section>
 
-    <section id="features">
-        <h2>Why Choose Tech Palette Mentor?</h2>
+   <section id="features">
+    <h2 style="text-align: center;">Why Choose Tech Palette Mentor?</h2>
+    <div style="text-align: center;">
         <p>Our app provides:</p>
-        <ul>
+        <ul style="list-style-type: none; padding: 0; text-align: left; display: inline-block;">
             <li>Real-time blending suggestions based on your personal paint inventory.</li>
             <li>Intuitive interface for easy navigation and usage.</li>
             <li>Experiment with colour theory to enhance your skills.</li>
             <li>Support for various file types, making it versatile for all your needs.</li>
         </ul>
+    </div>
 
-        <!-- Stripe Button Wrapper -->
-        <div class="stripe-button-wrapper">
-            <script async src="https://js.stripe.com/v3/buy-button.js"></script>
+    <!-- Stripe Button Wrapper -->
+    <div class="stripe-button-wrapper" style="display: inline-block; vertical-align: top;">
+        <script async src="https://js.stripe.com/v3/buy-button.js"></script>
 
-            <stripe-buy-button
-              buy-button-id="buy_btn_1QApqKIcCV1uZ856vlMNlS3k"
-              publishable-key="pk_live_51QAUaLIcCV1uZ856dNizRkc41p6GdHdxSpa91BcPfVLthFKC79e1zqyP169SsTkmQunQLCGeCFqZlIWYOeeFFcoA003NXZ8J1V"
-            >
-            </stripe-buy-button>
-        </div>
-    </section>
+        <stripe-buy-button
+          buy-button-id="buy_btn_1QApqKIcCV1uZ856vlMNlS3k"
+          publishable-key="pk_live_51QAUaLIcCV1uZ856dNizRkc41p6GdHdxSpa91BcPfVLthFKC79e1zqyP169SsTkmQunQLCGeCFqZlIWYOeeFFcoA003NXZ8J1V"
+        >
+        </stripe-buy-button>
+    </div>
+</section>
 
     <script>
         const menuIcon = document.getElementById("menu-icon");
