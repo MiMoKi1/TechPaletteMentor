@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="icon" type="image/x-icon" href="http://127.0.0.1:8080/favicon.ico">
+	 <link rel="icon" type="image/x-icon" href="http://127.0.0.1:8080/favicon.ico">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
@@ -16,6 +16,11 @@
         gtag('config', 'G-4YZ8N3B9R7');
     </script>
 
+
+	    <script src="https://apis.google.com/js/api.js"></script>
+    <script src="googleOAuth.js"></script> 
+
+	
     <style>
         body {
             display: flex;
@@ -248,6 +253,8 @@
     </style>
 </head>
 <body>
+	<body onload="handleClientLoad()">
+
     <div id="canvas-container">
         <div id="header">palette mentor</div>
       <a href="index.html"> <!-- Change 'index.html' to your homepage URL if different -->
@@ -326,6 +333,50 @@
         });
     </script>
 
+
+		<script>
+    let auth2;
+
+    function initGoogleAuth() {
+        gapi.load('auth2', function() {
+            auth2 = gapi.auth2.init({
+                client_id: '1031883252330-j3vht1ianq6850l0p78mv3nu2t1f4ks3.apps.googleusercontent.com', 
+                scope: 'profile email'
+            });
+            auth2.isSignedIn.listen(updateSigninStatus);
+        });
+    }
+
+    function updateSigninStatus(isSignedIn) {
+        if (isSignedIn) {
+            // User is signed in
+            // Call your function to check token or allow access
+            console.log('User is signed in');
+        } else {
+            // User is not signed in
+            handleAuthClick();
+        }
+    }
+
+    function handleAuthClick() {
+        auth2.signIn().then(function() {
+            console.log('User signed in');
+            checkUserToken(); 
+        });
+    }
+
+			function checkUserToken() {
+        console.log('Checking user token...');
+        // Your token verification logic here
+    }
+document.addEventListener('DOMContentLoaded', function() {
+    initGoogleAuth();
+});
+
+</script>
+
+
+		
     <footer>
         <p>
 	           © 2024 Palette Mentor. All Rights Reserved.
