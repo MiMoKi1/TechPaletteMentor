@@ -216,12 +216,16 @@ button:hover {
 <h2> About us </h2>
 At Tech Palette Mentor, we are passionate about bridging the gap between traditional art practices and modern technology. Our team of artists and tech enthusiasts has come together to create an innovative web app designed specifically for artists of all levels. With Tech Palette Mentor, we aim to empower creators by providing personalised colour blending suggestions based on their actual paint inventory. Our mission is to inspire creativity, enhance artistic expression, and help artists explore the endless possibilities of colour theory. Join us on this exciting journey to elevate your artistry! Learn more <a href="AboutUs.html">about us</a> 
 <section id="purchase">
-    <h2>Get Access</h2>
-    <p>Unlock the full potential of Tech Palette Mentor by purchasing access to our exclusive features.</p>
-    <form action="your_stripe_link_here" method="POST">
-        <button type="submit">Buy Now</button>
-    </form>
-</section>
+
+	<script async
+  src="https://js.stripe.com/v3/buy-button.js">
+</script>
+
+<stripe-buy-button
+  buy-button-id="buy_btn_1QApqKIcCV1uZ856vlMNlS3k"
+  publishable-key="pk_live_51QAUaLIcCV1uZ856dNizRkc41p6GdHdxSpa91BcPfVLthFKC79e1zqyP169SsTkmQunQLCGeCFqZlIWYOeeFFcoA003NXZ8J1V"
+>
+</stripe-buy-button>
 
 
 
@@ -245,11 +249,6 @@ At Tech Palette Mentor, we are passionate about bridging the gap between traditi
     </div>
 </section>
 
-<section id="purchase">
-        <form action="your_stripe_link_here" method="POST">
-        <button type="submit">Buy Now</button>
-    </form>
-</section>
 
 
 <!-- Footer -->
