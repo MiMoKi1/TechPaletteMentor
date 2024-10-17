@@ -21,24 +21,39 @@ app.use(cors());
 app.use(bodyParser.json());
 
 
-app.post('/webhook', async (req, res) => {
-    const event = req.body;
+app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res) => {
+    const sig = req.headers['stripe-signature']; // Get the signature
+    let event;
+
+    try {
+        event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET);
+    } catch (err) {
+        console.error(`Webhook Error: ${err.message}`);
+        return res.status(400).send(`Webhook Error: ${err.message}`);
+    }
 
     if (event.type === 'checkout.session.completed') {
         const session = event.data.object;
         const email = session.customer_email; // Get email from session
 
         // Update user's payment status in your database
-        // Assume you have a function to update payment status
         await updatePaymentStatus(email, true);
     }
 
     res.status(200).send('Webhook received');
 });
 
-// Replace with your database update logic
 async function updatePaymentStatus(email, status) {
-    // Implement your logic to update the database
+    try {
+        await pool.query(
+            'UPDATE users SET has_paid = $1 WHERE email = $2',
+            [status, email]
+        );
+    } catch (error) {
+        console.error('Error updating payment status:', error);
+    }
+}
+
 }
 // Payment Route
 app.post('/pay', async (req, res) => {
