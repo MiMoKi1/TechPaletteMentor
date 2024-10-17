@@ -454,7 +454,7 @@
         }
 
         // Stripe Payment Setup
-        var stripe = Stripe('YOUR_STRIPE_PUBLISHABLE_KEY');
+        var stripe = Stripe('pk_live_51QAUaLIcCV1uZ856dNizRkc41p6GdHdxSpa91BcPfVLthFKC79e1zqyP169SsTkmQunQLCGeCFqZlIWYOeeFFcoA003NXZ8J1V');
         document.getElementById('stripeCheckoutBtn').addEventListener('click', function () {
             fetch('https://techpalettementorback-710cc139297d.herokuapp.com/create-checkout-session', {
                 method: 'POST',
