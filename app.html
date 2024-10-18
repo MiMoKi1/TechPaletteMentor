@@ -37,7 +37,7 @@
               const checkPaidUsers = httpsCallable(functions, 'checkPaidUsers');
 
             // Create the async function to verify user
-            async function verifyPaidUser(email) {
+            async function verifyPaidUsers(email) {
             try {
                 const response = await checkPaidUsers({ email: userEmail });
                 if (response.data.accessGranted) {
@@ -54,7 +54,7 @@
         }
 
         // Call the function to verify the user
-        verifyPaidUser(userEmail);
+        verifyPaidUsers(userEmail);
       })
       .catch((error) => {
         console.error(error);
