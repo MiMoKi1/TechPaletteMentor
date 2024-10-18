@@ -34,9 +34,9 @@
               const userEmail = user.email;
 
               // Call the Cloud Function to check user access
-              const checkPaidUser = httpsCallable(functions, 'checkPaidUser');
+              const checkPaidUsers = httpsCallable(functions, 'checkPaidUsers');
               try {
-                const response = await checkPaidUser({ email: userEmail });
+                const response = await checkPaidUsers({ email: userEmail });
                 if (response.data.accessGranted) {
                   // Grant access to the app features
                   document.getElementById('features').style.display = 'block';
