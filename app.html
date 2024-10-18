@@ -25,7 +25,7 @@
 	    
       // Google Sign-In
       document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('google-login').addEventListener('click', function() {
+        document.getElementById('google-login').addEventListener('click', async  function() {
           const provider = new GoogleAuthProvider();
           
           signInWithPopup(auth, provider)
