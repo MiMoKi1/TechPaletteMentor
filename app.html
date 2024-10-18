@@ -5,6 +5,7 @@
       // Import Firebase
       import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.4/firebase-app.js";
       import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/9.8.4/firebase-auth.js";
+      import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/9.8.4/firebase-functions.js"; // Import Firebase Functions
 
       
       const firebaseConfig = {
@@ -20,7 +21,8 @@
       // Initialize Firebase
       const app = initializeApp(firebaseConfig);
       const auth = getAuth(app);
-
+      const functions = getFunctions(app); // Initialize Functions
+	    
       // Google Sign-In
       document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('google-login').addEventListener('click', function() {
@@ -31,21 +33,27 @@
               const user = result.user;
               const userEmail = user.email;
 
-              // Check user email against the local list
-              checkUserEmail(userEmail);
+              // Call the Cloud Function to check user access
+              const checkPaidUser = httpsCallable(functions, 'checkPaidUser');
+              try {
+                const response = await checkPaidUser({ email: userEmail });
+                if (response.data.accessGranted) {
+                  // Grant access to the app features
+                  document.getElementById('features').style.display = 'block';
+                  console.log("Access granted!");
+                } else {
+                  // Deny access
+                  alert('Access denied. Please make sure you’ve paid.');
+                }
+              } catch (error) {
+                console.error("Error checking user access:", error);
+              }
             })
             .catch((error) => {
               console.error(error);
             });
         });
       });
-
-      // Local list of paid users
-      const paidUsers = [
-        'moloney.michelle@gmail.com',
-        'paiduser2@example.com',
-        // Add more paid user emails here
-      ];
 
       function checkUserEmail(email) {
         if (paidUsers.includes(email)) {
@@ -408,6 +416,7 @@
                 <div id="palette" style="display: none;"></div>
             </div>
         </div> <!-- End of features container -->
+	    
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/tinycolor2@1.4.2/dist/tinycolor-min.js"></script>
