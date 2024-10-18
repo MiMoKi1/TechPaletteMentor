@@ -1,7 +1,63 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+    <script type="module">
+      // Import Firebase
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.4/firebase-app.js";
+      import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/9.8.4/firebase-auth.js";
+
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyDuDVzatnhf_2YkKE4i15e-Iqv8q1F3aWQ",
+        authDomain: "techpalettementor.firebaseapp.com",
+        projectId: "techpalettementor",
+        storageBucket: "techpalettementor.appspot.com",
+        messagingSenderId: "967425020550",
+        appId: "1:967425020550:web:7b4f044eb3ddec394b7707",
+        measurementId: "G-1K1FRHPGEG"
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+
+      // Google Sign-In
+      document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('google-login').addEventListener('click', function() {
+          const provider = new GoogleAuthProvider();
+          
+          signInWithPopup(auth, provider)
+            .then((result) => {
+              const user = result.user;
+              const userEmail = user.email;
+
+              // Check user email against the local list
+              checkUserEmail(userEmail);
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
+      });
+
+      // Local list of paid users
+      const paidUsers = [
+        'paiduser1@example.com',
+        'paiduser2@example.com',
+        // Add more paid user emails here
+      ];
+
+      function checkUserEmail(email) {
+        if (paidUsers.includes(email)) {
+          // Redirect to app.html if access is granted
+          window.location.href = 'app.html';
+        } else {
+          // Deny access
+          alert('Access denied. Please make sure you’ve paid.');
+        }
+      }
+    </script>
     <link rel="icon" type="image/x-icon" href="http://127.0.0.1:8080/favicon.ico">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -42,7 +98,7 @@
             position: absolute;
             top: 10px;
             left: 10px;
-            width: 100px;
+            width: 50px;
             height: auto;
             z-index: 100;
         }
@@ -254,6 +310,7 @@
       <a href="index.html"> <!-- Change 'index.html' to your homepage URL if different -->
     <img id="logo" src="palettementor100x100transp.png" alt="Palette Mentor Logo">
 </a>
+   <button id="google-login">Login with Google</button>
 
 
  <!-- Menu Icon -->
@@ -341,36 +398,5 @@
         </p>
 
     </footer>
-<!-- Code injected by live-server -->
-<script type="text/javascript">
-	// <![CDATA[  <-- For SVG support
-	if ('WebSocket' in window) {
-		(function() {
-			function refreshCSS() {
-				var sheets = [].slice.call(document.getElementsByTagName("link"));
-				var head = document.getElementsByTagName("head")[0];
-				for (var i = 0; i < sheets.length; ++i) {
-					var elem = sheets[i];
-					head.removeChild(elem);
-					var rel = elem.rel;
-					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
-						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
-						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
-					}
-					head.appendChild(elem);
-				}
-			}
-			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
-			var address = protocol + window.location.host + window.location.pathname + '/ws';
-			var socket = new WebSocket(address);
-			socket.onmessage = function(msg) {
-				if (msg.data == 'reload') window.location.reload();
-				else if (msg.data == 'refreshcss') refreshCSS();
-			};
-			console.log('Live reload enabled.');
-		})();
-	}
-	// ]]>
-</script>
 </body>
 </html>
