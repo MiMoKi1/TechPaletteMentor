@@ -1,22 +1,20 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
+const cors = require('cors')({ origin: true }); // Allow requests from your app's domain
 
 admin.initializeApp();
 
-const db = admin.firestore();
+exports.checkPaidUsers = functions.https.onRequest((request, response) => {
+  cors(request, response, () => {
+    const email = request.body.email;
 
-exports.checkPaidUser = functions.https.onCall(async (data, context) => {
-    const userEmail = data.email;
+    // Replace this logic with your actual check against the database
+    const paidUsers = ["user@example.com"]; // Example static list
 
-    try {
-        const userDoc = await db.collection('paidUsers').doc(userEmail).get();
-        if (userDoc.exists) {
-            return { accessGranted: true };
-        } else {
-            return { accessGranted: false };
-        }
-    } catch (error) {
-        console.error('Error checking user:', error);
-        throw new functions.https.HttpsError('internal', 'Error checking user');
+    if (paidUsers.includes(email)) {
+      response.send({ accessGranted: true });
+    } else {
+      response.send({ accessGranted: false });
     }
+  });
 });
