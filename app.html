@@ -50,6 +50,17 @@ async function verifyPaidUser(email) {
       // Grant access to the app features
       document.getElementById('features').style.display = 'block';
       console.log("Access granted!");
+
+
+	    // Check the authentication state and redirect
+              firebase.auth().onAuthStateChanged((user) => {
+                if (user) {
+                  // User is signed in, redirect to your desired page
+                  window.location.href = 'https://mimoki1.github.io/TechPaletteMentor/app.html'; // Change this to your actual GitHub Pages URL
+                }
+              });
+
+	    
     } else {
       // Deny access
       alert('Access denied. Please make sure you’ve paid.');
