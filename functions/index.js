@@ -4,7 +4,7 @@ const cors = require('cors')({ origin: 'https://mimoki1.github.io' }); // Specif
 
 admin.initializeApp();
 
-exports.checkPaidUsers = functions.https.onRequest((req, res) => {
+exports.checkPaidUser = functions.https.onRequest((req, res) => {
   // Use cors middleware
   cors(req, res, () => {
     if (req.method !== 'POST') {
@@ -14,7 +14,7 @@ exports.checkPaidUsers = functions.https.onRequest((req, res) => {
     const email = req.body.email;
 
     // Check if the email exists in the Firestore collection
-    admin.firestore().collection('paidUsers').doc(email).get()
+    admin.firestore().collection('paidUser').doc(email).get()
       .then(doc => {
         if (doc.exists) {
           // Access granted
