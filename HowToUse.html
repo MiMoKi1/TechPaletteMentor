@@ -38,7 +38,7 @@
         .content {
             margin: 30px;
             font-family: Poppins, sans-serif;
-            font-size: 16px;
+            font-size: 12px;
             color: #333;
             text-align: justify;
             line-height: 1.6;
@@ -130,41 +130,6 @@
     display: flex;
 }
 
-/* Purchase button styles */
-form {
-    text-align: center;
-}
-
-button {
-    background-color: #FF6F61; /* Cute pink color */
-    color: white;
-    border: none;
-    border-radius: 12px; /* Rounded corners */
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-    position: relative;
-    overflow: hidden; /* To contain the pseudo-element */
-    transition: transform 0.3s;
-}
-
-button::before {
-    content: '❤️'; /* Heart symbol */
-    position: absolute;
-    left: 84px; /* Adjusted left position */
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 20px; /* Heart size */
-    opacity: 0.7; /* Slightly transparent */
-}
-
-button:hover {
-    background-color: #FF4C4C; /* Darker pink on hover */
-    transform: scale(1.05); /* Slight scale on hover */
-}
-
-
     </style>
 </head>
 <body>
@@ -216,15 +181,6 @@ button:hover {
         <li><strong>GIF</strong>: Useful for simple graphics and animations, although these may not provide the best colour data.</li>
     </ul>
 
-<section id="purchase">
-    <form action="https://buy.stripe.com/5kA7v5eBW35AgdGdQQ" method="POST">
-        <button type="submit">Buy Now</button>
-    </form>
-</section>
-
-
-
-
     <p><strong>Step 2: Drag and Drop or Click to Upload</strong><br>
         You can easily upload your image by either dragging and dropping it into the designated area on the app or clicking the upload button to select a file from your device.
     </p>
@@ -250,13 +206,6 @@ button:hover {
     <p><strong>Step 2: Analyse the Uploaded Image</strong><br>
         Once the image is uploaded, <strong>Tech Palette Mentor</strong> analyses its colour composition. The app extracts the dominant colours from your image and matches them with the paint colours in your inventory.
     </p>
-
-
-<section id="purchase">
-    <form action="https://buy.stripe.com/5kA7v5eBW35AgdGdQQ" method="POST">
-        <button type="submit">Buy Now</button>
-    </form>
-</section>
 
 
     <p><strong>Step 3: Get Personalised Blends</strong><br>
