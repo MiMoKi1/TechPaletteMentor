@@ -389,7 +389,15 @@
 
     <script src="https://cdn.jsdelivr.net/npm/tinycolor2@1.4.2/dist/tinycolor-min.js"></script>
     <script src="renderer.js"></script>
+ <script>
+        const menuIcon = document.getElementById("menu-icon");
+        const dropdown = document.querySelector(".dropdown");
 
+        menuIcon.addEventListener("click", () => {
+            menuIcon.classList.toggle("active");
+            dropdown.classList.toggle("active");
+        });
+    </script>
     <footer>
         <p>
             © 2024 Palette Mentor. All Rights Reserved.
