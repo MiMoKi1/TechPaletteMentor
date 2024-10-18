@@ -25,7 +25,7 @@
 	    
       // Google Sign-In
       document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('google-login').addEventListener('click', async  function() {
+        document.getElementById('google-login').addEventListener('click', function() {
           const provider = new GoogleAuthProvider();
           
           signInWithPopup(auth, provider)
@@ -35,7 +35,10 @@
 
               // Call the Cloud Function to check user access
               const checkPaidUsers = httpsCallable(functions, 'checkPaidUsers');
-              try {
+
+            // Create the async function to verify user
+            async function verifyPaidUser(email) {
+            try {
                 const response = await checkPaidUsers({ email: userEmail });
                 if (response.data.accessGranted) {
                   // Grant access to the app features
@@ -45,15 +48,19 @@
                   // Deny access
                   alert('Access denied. Please make sure you’ve paid.');
                 }
-              } catch (error) {
-                console.error("Error checking user access:", error);
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
+          } catch (error) {
+            console.error("Error checking user access:", error);
+          }
+        }
+
+        // Call the function to verify the user
+        verifyPaidUser(userEmail);
+      })
+      .catch((error) => {
+        console.error(error);
       });
+  });
+});
 
       function checkUserEmail(email) {
         if (paidUsers.includes(email)) {
