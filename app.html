@@ -6,7 +6,7 @@
       import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.4/firebase-app.js";
       import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/9.8.4/firebase-auth.js";
 
-      // Your web app's Firebase configuration
+      
       const firebaseConfig = {
         apiKey: "AIzaSyDuDVzatnhf_2YkKE4i15e-Iqv8q1F3aWQ",
         authDomain: "techpalettementor.firebaseapp.com",
@@ -131,6 +131,24 @@
             font-size: 12px;
             max-width: 280px;
         }
+
+               .inline-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        #hexDisplay {
+            display: flex;
+            align-items: center;
+            margin-top: 2px;
+        }
+        #colorDisplay {
+            width: 40px;
+            height: 20px;
+            margin-left: 5px;
+            border: 1px solid #000;
+        }
         button, input[type="color"], input[type="range"] {
             margin-right: 5px;
             padding: 5px 8px;
@@ -142,6 +160,10 @@
             cursor: pointer;
             transition: background-color 0.3s;
         }
+
+               #toggleDrawingAids:hover, #togglePalette:hover {
+            background-color: #8B5B29;
+        }
         button:hover {
             background-color: #C49337;
         }
@@ -151,6 +173,145 @@
             padding: 10px 0;
             background-color: #FAF2E2;
             position: relative;
+        }
+
+               input[type="number"] {
+            background-color: #fff;
+            color: black;
+            margin-right: 5px;
+            padding: 5px 8px;
+            font-size: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        hr {
+            margin: 5px 0;
+            border: none;
+            border-top: 1px solid #ccc;
+        }
+        .grid-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        .grid-controls input[type="range"] {
+            width: 100px;
+        }
+        #palette {
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            margin-top: 10px;
+            display: none;
+        }
+        .palette-item {
+            display: flex;
+            align-items: center;
+            margin: 3px 0;
+        }
+        .swatch {
+            width: 15px;
+            height: 15px;
+            margin-right: 5px;
+            border: 1px solid #000;
+        }
+        #searchBox {
+            width: 80px;
+            padding: 5px;
+        }
+        .palette-buttons {
+            display: flex;
+            flex-direction: column;
+            margin-top: 10px;
+        }
+        .blend-count-controls {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .palette-action-controls {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .selected-swatch {
+            border: 3px solid #000;
+        }
+        footer {
+            margin-top: auto;
+            text-align: center;
+            padding: 10px 0;
+            background-color: #FAF2E2;
+            position: relative;
+        }
+        footer a {
+            color: black;
+            text-decoration: none;
+            margin: 0 10px;
+	    font-size: 10px;
+            transition: color 0.3s ease, font-weight 0.3s ease;
+        }
+        footer a:hover {
+            font-weight: bold;
+        }
+        footer a:active {
+            color: white;
+        }
+        footer a:visited {
+            color: black;
+        }
+        footer p {
+        font-size: 10px; /* Adjust the size to make the text smaller */
+        color: black;
+    }
+        /* Dropdown Menu Styles */
+        #menu-icon {
+            position: absolute;
+            top: 120px;
+            left: 10px;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+
+        #menu-icon:hover {
+            transform: scale(1.1);
+            filter: brightness(1.2);
+        }
+
+        .dropdown {
+            position: absolute;
+            top: 170px;
+            left: 10px;
+            background-color: #FAF2E2;
+            border: 1px solid #8B5B29;
+            border-radius: 5px;
+            display: none;
+            flex-direction: column;
+            width: 160px;
+            padding: 5px;
+        }
+
+        .dropdown a {
+            text-decoration: none;
+            color: #8B5B29;
+            padding: 10px;
+            display: block;
+            transition: background-color 0.3s ease, font-weight 0.3s ease;
+        }
+
+        .dropdown a:hover {
+            background-color: #8B5B29;
+            color: white;
+            font-weight: bold;
+        }
+
+        #menu-icon.active + .dropdown {
+            display: flex;
         }
     </style>
 </head>
