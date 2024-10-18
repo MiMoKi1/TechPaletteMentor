@@ -36,6 +36,14 @@
             height: auto;
             z-index: 100;
         }
+	            .content-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+        
         .content {
             margin: 30px;
             font-family: Poppins, sans-serif;
@@ -47,6 +55,14 @@
         .content h1 {
             font-size: 24px;
             color: #8B5B29;
+        }
+          .video-container {
+            flex-basis: 40%; /* Controls the width of the video container */
+        }
+        .video-container video {
+            width: 100%;
+            height: auto;
+            margin-top: 20px;
         }
         footer {
             margin-top: auto;
