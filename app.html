@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <script type="module">
       // Import Firebase
       import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.4/firebase-app.js";
@@ -22,46 +21,24 @@
       const app = initializeApp(firebaseConfig);
       const auth = getAuth(app);
 
-	    // Function to check user authentication status and display features accordingly
-        function checkUserAuth() {
-            const user = auth.currentUser; // Get the current user
-            const drawingAids = document.getElementById('drawingAids');
-            const paletteButtons = document.getElementById('paletteButtons');
+      // Google Sign-In
+      document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('google-login').addEventListener('click', function() {
+          const provider = new GoogleAuthProvider();
+          
+          signInWithPopup(auth, provider)
+            .then((result) => {
+              const user = result.user;
+              const userEmail = user.email;
 
-            if (user) {
-                // User is logged in, show features
-                drawingAids.style.display = 'block';
-                paletteButtons.style.display = 'block';
-            } else {
-                // User is not logged in, hide features and prompt for login
-                drawingAids.style.display = 'none';
-                paletteButtons.style.display = 'none';
-                alert('Please log in to access these features.');
-            }
-        }
-	    
-    // Google Sign-In
-        document.addEventListener('DOMContentLoaded', function() {
-            // Check user authentication status on page load
-            checkUserAuth();
-
-            document.getElementById('google-login').addEventListener('click', function() {
-                const provider = new GoogleAuthProvider();
-
-                signInWithPopup(auth, provider)
-                    .then((result) => {
-                        const user = result.user;
-                        const userEmail = user.email;
-
-                        // Check user email against the local list
-                        checkUserEmail(userEmail);
-                    })
-                    .catch((error) => {
-                        console.error(error);
-                    });
+              // Check user email against the local list
+              checkUserEmail(userEmail);
+            })
+            .catch((error) => {
+              console.error(error);
             });
         });
-
+      });
 
       // Local list of paid users
       const paidUsers = [
@@ -72,8 +49,10 @@
 
       function checkUserEmail(email) {
         if (paidUsers.includes(email)) {
-          // Redirect to app.html if access is granted
-          window.location.href = 'app.html';
+          // Show the features container
+          document.getElementById('features').style.display = 'block';
+          // Redirect to app.html if you still want to do that
+          // window.location.href = 'app.html'; // Comment this if you want to stay on the page
         } else {
           // Deny access
           alert('Access denied. Please make sure you’ve paid.');
@@ -105,7 +84,7 @@
             height: 100vh;
             overflow: auto;
             background-color: #FAF2E2;
- font-size: 12px; /* Reduced font size */
+            font-size: 12px; /* Reduced font size */
         }
         #header {
             text-align: center;
@@ -128,7 +107,7 @@
             width: 100%;
             height: 100%;
             position: relative;
-            overflow: auto
+            overflow: auto;
             background-color: #FAF2E2;
         }
         #canvas {
@@ -152,23 +131,6 @@
             font-size: 12px;
             max-width: 280px;
         }
-        .inline-controls {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 5px;
-        }
-        #hexDisplay {
-            display: flex;
-            align-items: center;
-            margin-top: 2px;
-        }
-        #colorDisplay {
-            width: 40px;
-            height: 20px;
-            margin-left: 5px;
-            border: 1px solid #000;
-        }
         button, input[type="color"], input[type="range"] {
             margin-right: 5px;
             padding: 5px 8px;
@@ -180,76 +142,8 @@
             cursor: pointer;
             transition: background-color 0.3s;
         }
-        #toggleDrawingAids:hover, #togglePalette:hover {
-            background-color: #8B5B29;
-        }
         button:hover {
             background-color: #C49337;
-        }
-        input[type="number"] {
-            background-color: #fff;
-            color: black;
-            margin-right: 5px;
-            padding: 5px 8px;
-            font-size: 12px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        hr {
-            margin: 5px 0;
-            border: none;
-            border-top: 1px solid #ccc;
-        }
-        .grid-controls {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 5px;
-        }
-        .grid-controls input[type="range"] {
-            width: 100px;
-        }
-        #palette {
-            max-height: 400px;
-            overflow-y: auto;
-            border: 1px solid #ccc;
-            margin-top: 10px;
-            display: none;
-        }
-        .palette-item {
-            display: flex;
-            align-items: center;
-            margin: 3px 0;
-        }
-        .swatch {
-            width: 15px;
-            height: 15px;
-            margin-right: 5px;
-            border: 1px solid #000;
-        }
-        #searchBox {
-            width: 80px;
-            padding: 5px;
-        }
-        .palette-buttons {
-            display: flex;
-            flex-direction: column;
-            margin-top: 10px;
-        }
-        .blend-count-controls {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        .palette-action-controls {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        .selected-swatch {
-            border: 3px solid #000;
         }
         footer {
             margin-top: auto;
@@ -258,167 +152,75 @@
             background-color: #FAF2E2;
             position: relative;
         }
-        footer a {
-            color: black;
-            text-decoration: none;
-            margin: 0 10px;
-	    font-size: 10px;
-            transition: color 0.3s ease, font-weight 0.3s ease;
-        }
-        footer a:hover {
-            font-weight: bold;
-        }
-        footer a:active {
-            color: white;
-        }
-        footer a:visited {
-            color: black;
-        }
-        footer p {
-        font-size: 10px; /* Adjust the size to make the text smaller */
-        color: black;
-    }
-        /* Dropdown Menu Styles */
-        #menu-icon {
-            position: absolute;
-            top: 120px;
-            left: 10px;
-            width: 40px;
-            height: 40px;
-            cursor: pointer;
-            transition: transform 0.3s ease, filter 0.3s ease;
-        }
-
-        #menu-icon:hover {
-            transform: scale(1.1);
-            filter: brightness(1.2);
-        }
-
-        .dropdown {
-            position: absolute;
-            top: 170px;
-            left: 10px;
-            background-color: #FAF2E2;
-            border: 1px solid #8B5B29;
-            border-radius: 5px;
-            display: none;
-            flex-direction: column;
-            width: 160px;
-            padding: 5px;
-        }
-
-        .dropdown a {
-            text-decoration: none;
-            color: #8B5B29;
-            padding: 10px;
-            display: block;
-            transition: background-color 0.3s ease, font-weight 0.3s ease;
-        }
-
-        .dropdown a:hover {
-            background-color: #8B5B29;
-            color: white;
-            font-weight: bold;
-        }
-
-        #menu-icon.active + .dropdown {
-            display: flex;
-        }
     </style>
 </head>
 <body>
     <div id="canvas-container">
         <div id="header">palette mentor</div>
-      <a href="index.html"> 
-    <img id="logo" src="palettementor100x100transp.png" alt="Palette Mentor Logo">
-</a>
-   <button id="google-login">Login with Google</button>
+        <a href="index.html">
+            <img id="logo" src="palettementor100x100transp.png" alt="Palette Mentor Logo">
+        </a>
+        <button id="google-login">Login with Google</button>
 
-
- <!-- Menu Icon -->
-        <img id="menu-icon" src="menu.png" alt="Menu Icon">
-
-        <!-- Dropdown Menu -->
-        <div class="dropdown">
-    <a href="index.html">Home</a>
-    <a href="AboutUs.html">About Us</a>
-    <a href="HowToUse.html">How to Use</a>
-    <a href="buynow.html">Buy</a>
-    <a href="App.html">Web App</a>
- <a href="ContactUs.html">Contact Us</a>
-        </div>
-
-        <canvas id="canvas"></canvas>
-        <div id="controls">
-            <div class="inline-controls">
-                <strong>Upload image:</strong>
-                <input type="file" id="imageUpload" accept="image/png, image/jpeg">
-            </div>
-            <hr>
-            <button id="toggleDrawingAids">Drawing Aids</button>
-            <div id="drawingAids" style="display: none;">
-                <div class="grid-controls">
-                    <button id="toggleGrid">Grid</button>
-                    <input type="color" id="gridColor" value="#C49380" title="Choose Grid Color">
-                    <input type="range" id="gridSize" min="2" max="20" value="10" title="Grid Size">
-                </div>
-                <hr>
+        <div id="features" style="display: none;"> <!-- Features container -->
+            <canvas id="canvas"></canvas>
+            <div id="controls">
                 <div class="inline-controls">
-                    <button id="goldenRatioButton">Golden Ratio</button>
-                    <input type="color" id="goldenRatioColor" value="#FFD700" title="Choose Golden Ratio Color">
+                    <strong>Upload image:</strong>
+                    <input type="file" id="imageUpload" accept="image/png, image/jpeg">
                 </div>
                 <hr>
-            </div>
-            <div id="hexDisplay">
-                <h4 id="hexValue">Hex Value: N/A</h4>
-                <div id="colorDisplay"></div>
-            </div>
-            <hr>
-            <strong>Blends:</strong>
-            <div id="results"></div>
-            <hr>
-            <button id="togglePalette">Palette</button>
-            <div id="paletteButtons" class="palette-buttons" style="display: none;">
-                <div class="blend-count-controls inline-controls">
-                    <strong><label for="blendCount">Number of colors to blend:</label></strong>
-                    <input type="number" id="blendCount" min="1" max="10" value="3">
+                <button id="toggleDrawingAids">Drawing Aids</button>
+                <div id="drawingAids" style="display: none;">
+                    <div class="grid-controls">
+                        <button id="toggleGrid">Grid</button>
+                        <input type="color" id="gridColor" value="#C49380" title="Choose Grid Color">
+                        <input type="range" id="gridSize" min="2" max="20" value="10" title="Grid Size">
+                    </div>
+                    <hr>
+                    <div class="inline-controls">
+                        <button id="goldenRatioButton">Golden Ratio</button>
+                        <input type="color" id="goldenRatioColor" value="#FFD700" title="Choose Golden Ratio Color">
+                    </div>
+                    <hr>
                 </div>
-                <div class="palette-action-controls inline-controls">
-                    <button id="selectAll">Select All</button>
-                    <button id="clearAll">Clear</button>
-                    <label for="searchBox">Search:</label>
-                    <input type="text" id="searchBox" placeholder="name,hex,pigment code">
+                <div id="hexDisplay">
+                    <h4 id="hexValue">Hex Value: N/A</h4>
+                    <div id="colorDisplay"></div>
                 </div>
+                <hr>
+                <strong>Blends:</strong>
+                <div id="results"></div>
+                <hr>
+                <button id="togglePalette">Palette</button>
+                <div id="paletteButtons" class="palette-buttons" style="display: none;">
+                    <div class="blend-count-controls inline-controls">
+                        <strong><label for="blendCount">Number of colors to blend:</label></strong>
+                        <input type="number" id="blendCount" min="1" max="10" value="3">
+                    </div>
+                    <div class="palette-action-controls inline-controls">
+                        <button id="selectAll">Select All</button>
+                        <button id="clearAll">Clear</button>
+                        <label for="searchBox">Search:</label>
+                        <input type="text" id="searchBox" placeholder="name, hex, pigment code">
+                    </div>
+                </div>
+                <div id="palette" style="display: none;"></div>
             </div>
-            <div id="palette" style="display:none;"></div>
-        </div>
+        </div> <!-- End of features container -->
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/tinycolor2@1.4.2/dist/tinycolor-min.js"></script>
     <script src="renderer.js"></script>
 
- <script>
-        const menuIcon = document.getElementById("menu-icon");
-        const dropdown = document.querySelector(".dropdown");
-
-        menuIcon.addEventListener("click", () => {
-            menuIcon.classList.toggle("active");
-            dropdown.classList.toggle("active");
-        });
-    </script>
-
     <footer>
         <p>
-	           © 2024 Palette Mentor. All Rights Reserved.
+            © 2024 Palette Mentor. All Rights Reserved.
             <a href="TermsandConditions.html">T&C</a> |
             <a href="PrivacyPolicy.html">Privacy Policy</a> |
             <a href="LegalDisclaimer.html">Legal Disclaimer</a> |
-            <a href="ContactUs.html">Contact Us</a> |
-            <a href="https://www.instagram.com/techpalettementor"><img src="instagram.png" alt="Instagram" style="width:14px;height:14px;"></a>
-	   <a href="https://www.pinterest.com/techpalettementor/"><img src="pinterest.png" alt="Pinterest" style="width:14px;height:14px;"></a>
-<a href="https://www.linkedin.com/company/techpalettementor/"><img src="linkedin.png" alt="LinkedIn" style="width:14px;height:14px;"></a>
+            <a href="ContactUs.html">Contact Us</a>
         </p>
-
     </footer>
 </body>
 </html>
