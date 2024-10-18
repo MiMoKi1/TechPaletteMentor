@@ -22,24 +22,46 @@
       const app = initializeApp(firebaseConfig);
       const auth = getAuth(app);
 
-      // Google Sign-In
-      document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('google-login').addEventListener('click', function() {
-          const provider = new GoogleAuthProvider();
-          
-          signInWithPopup(auth, provider)
-            .then((result) => {
-              const user = result.user;
-              const userEmail = user.email;
+	    // Function to check user authentication status and display features accordingly
+        function checkUserAuth() {
+            const user = auth.currentUser; // Get the current user
+            const drawingAids = document.getElementById('drawingAids');
+            const paletteButtons = document.getElementById('paletteButtons');
 
-              // Check user email against the local list
-              checkUserEmail(userEmail);
-            })
-            .catch((error) => {
-              console.error(error);
+            if (user) {
+                // User is logged in, show features
+                drawingAids.style.display = 'block';
+                paletteButtons.style.display = 'block';
+            } else {
+                // User is not logged in, hide features and prompt for login
+                drawingAids.style.display = 'none';
+                paletteButtons.style.display = 'none';
+                alert('Please log in to access these features.');
+            }
+        }
+	    
+    // Google Sign-In
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check user authentication status on page load
+            checkUserAuth();
+
+            document.getElementById('google-login').addEventListener('click', function() {
+                const provider = new GoogleAuthProvider();
+
+                signInWithPopup(auth, provider)
+                    .then((result) => {
+                        const user = result.user;
+                        const userEmail = user.email;
+
+                        // Check user email against the local list
+                        checkUserEmail(userEmail);
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                    });
             });
         });
-      });
+
 
       // Local list of paid users
       const paidUsers = [
@@ -307,7 +329,7 @@
 <body>
     <div id="canvas-container">
         <div id="header">palette mentor</div>
-      <a href="index.html"> <!-- Change 'index.html' to your homepage URL if different -->
+      <a href="index.html"> 
     <img id="logo" src="palettementor100x100transp.png" alt="Palette Mentor Logo">
 </a>
    <button id="google-login">Login with Google</button>
