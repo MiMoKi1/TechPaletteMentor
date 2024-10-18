@@ -34,9 +34,9 @@
               const userEmail = user.email;
 
 // Call the Cloud Function to check user access
-async function verifyPaidUsers(email) {
+async function verifyPaidUser(email) {
   try {
-    const response = await fetch('https://us-central1-techpalettementor.cloudfunctions.net/checkPaidUsers', {
+    const response = await fetch('https://us-central1-techpalettementor.cloudfunctions.net/checkPaidUser', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
