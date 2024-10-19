@@ -97,16 +97,39 @@ const firebaseConfig = {
                 console.error("Error in verifying paid user:", error);
             }
         }
+
+	<script type="module">
+    // ... (your existing Firebase and Google login logic)
+
+    // Email login event listener
+    document.getElementById('email-login').addEventListener('click', async () => {
+        const email = prompt("Enter your email:");
+        const password = prompt("Enter your password:");
+
+        if (email && password) {
+            try {
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                console.log("User signed in successfully:", userCredential.user);
+                verifyPaidUser(userCredential.user.email); // Call your existing function to check paid status
+            } catch (error) {
+                console.error("Error during email login:", error);
+            }
+        } else {
+            alert("Email and password are required.");
+        }
+    });
+</script>
+
     </script>
 
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.apis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <title>Tech Palette Mentor</title>
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4YZ8N3B9R7"></script>
+    <!--  tag (gtag.js) -->
+    <script async src="https://www.tagmanager.com/gtag/js?id=G-4YZ8N3B9R7"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
@@ -372,6 +395,11 @@ const firebaseConfig = {
     transition: all 0.3s ease;
 }
 
+#google-login:hover {
+    background-color: #A77B64; 
+    transform: scale(1.02); 
+}
+
 
     </style>
 </head>
@@ -382,6 +410,7 @@ const firebaseConfig = {
             <img id="logo" src="palettementor100x100transp.png" alt="Palette Mentor Logo">
         </a>
         <button id="google-login">Login with Google</button>
+<button id="email-login">Login with Email</button>
 
 	    
 
