@@ -74,6 +74,19 @@ const firebaseConfig = {
                         console.log("Access granted, redirecting...");
                         document.getElementById('features').style.display = 'block'; // Ensure this element exists
                         // Optionally handle the flow of your application here
+
+    // Store the user's palette choice when they log in (example array)
+    const paletteArray = ['#FF5733', '#33FF57', '#3357FF']; // Replace with actual user's choice
+    localStorage.setItem('userPalette', JSON.stringify(paletteArray)); // Save user preferences
+
+    // Retrieve preferences on load
+    const storedPalette = JSON.parse(localStorage.getItem('userPalette'));
+    if (storedPalette) {
+        console.log("Retrieved user palette:", storedPalette); // Log the retrieved palette
+        // You can call a function to display this palette if you have one
+    }
+}
+			    
                     } else {
                         alert('Access denied. Please make sure you’ve paid.');
                     }
@@ -359,10 +372,11 @@ const firebaseConfig = {
     transition: all 0.3s ease;
   }
 
-  #google-login:hover {
+ #google-login:hover {
     background-color: #A77B64; /* Darken on hover for effect */
-    transform: scale(1.05); /* Slight zoom effect */
-  }
+    transform: scale(1.02); /* Slight zoom effect */
+}
+
     </style>
 </head>
 <body>
