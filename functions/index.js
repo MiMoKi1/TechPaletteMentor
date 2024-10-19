@@ -6,9 +6,9 @@ exports.checkPaidUser = functions.https.onRequest((req, res) => {
         }
 
         try {
-            console.log('Request body:', req.body); // Log what the function is receiving
+            console.log('Request body:', req.body);  // Log the request body to debug
 
-            const email = req.body.email;
+            const email = req.body.email;  // Check if you're getting this correctly
 
             if (!email) {
                 console.log('Email not provided in the request body');
