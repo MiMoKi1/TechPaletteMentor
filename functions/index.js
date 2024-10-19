@@ -1,11 +1,11 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
-const cors = require('cors'); // Initialize cors without options here
+const cors = require('cors'); // Import CORS
 
 admin.initializeApp();
 
 exports.checkPaidUser = functions.https.onRequest((req, res) => {
-    // Use CORS middleware with the specified origin
+    // Use CORS middleware
     cors({ origin: 'https://mimoki1.github.io' })(req, res, () => {
         console.log('Request body:', req.body); // Log the request body
 
