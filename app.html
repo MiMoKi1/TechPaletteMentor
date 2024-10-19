@@ -53,12 +53,15 @@ async function verifyPaidUser(email) {
   
 	
 try {
+    const payload = { email: email }; // Prepare the payload with the actual email variable
+    console.log("Payload sent to server:", JSON.stringify(payload)); // Log the payload
+
     const response = await fetch('https://us-central1-techpalettementor.cloudfunctions.net/checkPaidUser', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email: userEmail }), // Replace with the actual email variable
+        body: JSON.stringify(payload), // Make sure this is a valid JSON object
     });
 
     console.log("Response status:", response.status);
