@@ -2,53 +2,51 @@
 <html lang="en">
 <head>
 <script type="module">
-    // Import Firebase
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.4/firebase-app.js";
-    import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/9.8.4/firebase-auth.js";
-    import { getFunctions } from "https://www.gstatic.com/firebasejs/9.8.4/firebase-functions.js"; // Import Firebase Functions
+// Import Firebase
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.4/firebase-app.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/9.8.4/firebase-auth.js";
+import { getFunctions } from "https://www.gstatic.com/firebasejs/9.8.4/firebase-functions.js"; // Import Firebase Functions
 
-    const firebaseConfig = {
-        // This is a restricted key and is set to only be used here
-        apiKey: "AIzaSyDuDVzatnhf_2YkKE4i15e-Iqv8q1F3aWQ",
-        authDomain: "techpalettementor.firebaseapp.com",
-        projectId: "techpalettementor",
-        storageBucket: "techpalettementor.appspot.com",
-        messagingSenderId: "967425020550",
-        appId: "1:967425020550:web:7b4f044eb3ddec394b7707",
-        measurementId: "G-1K1FRHPGEG"
-    };
+const firebaseConfig = {
+    apiKey: "AIzaSyDuDVzatnhf_2YkKE4i15e-Iqv8q1F3aWQ",
+    authDomain: "techpalettementor.firebaseapp.com",
+    projectId: "techpalettementor",
+    storageBucket: "techpalettementor.appspot.com",
+    messagingSenderId: "967425020550",
+    appId: "1:967425020550:web:7b4f044eb3ddec394b7707",
+    measurementId: "G-1K1FRHPGEG"
+};
 
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const functions = getFunctions(app); // Initialize Functions
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const functions = getFunctions(app); // Initialize Functions
 
-    // Google Sign-In
-    document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('google-login').addEventListener('click', function() {
-            const provider = new GoogleAuthProvider();
-            
-            signInWithPopup(auth, provider)
-                .then((result) => {
-                    const user = result.user; // Get the user object
- 		verifyPaidUser(user.email); // Pass the email directly to the function
-			
-                    })
-                .catch((error) => {
-                    console.error(error);
-                });
-        });
+// Google Sign-In
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('google-login').addEventListener('click', function() {
+        const provider = new GoogleAuthProvider();
+        
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                const user = result.user; // Get the user object
+                verifyPaidUser(user.email); // Pass the email directly to the function
+            })
+            .catch((error) => {
+                console.error(error);
+            });
     });
+});
 
 // Function to verify if the user has paid
-async function verifyPaidUser() {
-          try {
+async function verifyPaidUser(email) { // Accept email as an argument
+    try {
         const response = await fetch('https://us-central1-techpalettementor.cloudfunctions.net/checkPaidUser', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ email }),
+            body: JSON.stringify({ email }), // Pass email correctly
         });
 
         const data = await response.json();
@@ -68,6 +66,7 @@ async function verifyPaidUser() {
         console.error("Error checking user access:", error);
     }
 }
+
 
 </script>
 
