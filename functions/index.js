@@ -22,7 +22,7 @@ exports.checkPaidUser = functions.https.onRequest((req, res) => {
                 }
 
                 // Firestore query to check if the email exists in the paidUsers collection
-                const paidUsersRef = admin.firestore().collection('paidUsers').where('email', '==', email.toLowerCase());
+                const paidUsersRef = admin.firestore().collection('paidUsers').where('email', '==', email);
                 paidUsersRef.get()
                     .then(snapshot => {
                         if (snapshot.empty) {
@@ -46,4 +46,3 @@ exports.checkPaidUser = functions.https.onRequest((req, res) => {
         }
     });
 });
-
