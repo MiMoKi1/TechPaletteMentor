@@ -8,6 +8,7 @@ import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstati
 import { getFunctions } from "https://www.gstatic.com/firebasejs/9.8.4/firebase-functions.js"; // Import Firebase Functions
 
 const firebaseConfig = {
+	//this api key is on the restricted list and is locked to this site
     apiKey: "AIzaSyDuDVzatnhf_2YkKE4i15e-Iqv8q1F3aWQ",
     authDomain: "techpalettementor.firebaseapp.com",
     projectId: "techpalettementor",
@@ -48,6 +49,30 @@ const firebaseConfig = {
             }
         });
 
+
+ // Email login event listener
+        document.addEventListener('DOMContentLoaded', function() {
+            const emailLoginButton = document.getElementById('email-login'); // Find the email login button
+
+            emailLoginButton.addEventListener('click', async () => {
+                const email = prompt("Enter your email:");
+                const password = prompt("Enter your password:");
+
+                if (email && password) {
+                    try {
+                        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                        console.log("User signed in successfully:", userCredential.user);
+                        verifyPaidUser(userCredential.user.email); // Call your existing function to check paid status
+                    } catch (error) {
+                        console.error("Error during email login:", error);
+                    }
+                } else {
+                    alert("Email and password are required.");
+                }
+            });
+        });
+
+	
         // Function to verify if the user has paid
         async function verifyPaidUser(email) {
             console.log("Verifying paid user:", email); // This shows your email is retrieved correctly
@@ -98,26 +123,7 @@ const firebaseConfig = {
             }
         }
 
-	<script type="module">
-    // ... (your existing Firebase and Google login logic)
 
-    // Email login event listener
-    document.getElementById('email-login').addEventListener('click', async () => {
-        const email = prompt("Enter your email:");
-        const password = prompt("Enter your password:");
-
-        if (email && password) {
-            try {
-                const userCredential = await signInWithEmailAndPassword(auth, email, password);
-                console.log("User signed in successfully:", userCredential.user);
-                verifyPaidUser(userCredential.user.email); // Call your existing function to check paid status
-            } catch (error) {
-                console.error("Error during email login:", error);
-            }
-        } else {
-            alert("Email and password are required.");
-        }
-    });
 </script>
 
     </script>
@@ -410,7 +416,7 @@ const firebaseConfig = {
             <img id="logo" src="palettementor100x100transp.png" alt="Palette Mentor Logo">
         </a>
         <button id="google-login">Login with Google</button>
-<button id="email-login">Login with Email</button>
+<	button id="email-login">Login with Email</button>
 
 	    
 
