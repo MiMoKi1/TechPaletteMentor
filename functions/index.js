@@ -1,3 +1,9 @@
+const functions = require('firebase-functions');
+const admin = require('firebase-admin');
+const cors = require('cors')({ origin: 'https://mimoki1.github.io' }); // <-- Add this line here
+
+admin.initializeApp();
+
 exports.checkPaidUser = functions.https.onRequest((req, res) => {
     cors({ origin: 'https://mimoki1.github.io' })(req, res, () => {
         if (req.method !== 'POST') {
