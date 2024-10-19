@@ -8,7 +8,6 @@ import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstati
 import { getFunctions } from "https://www.gstatic.com/firebasejs/9.8.4/firebase-functions.js"; // Import Firebase Functions
 
 const firebaseConfig = {
-	//this api key is on the restricted list and is locked to this site
     apiKey: "AIzaSyDuDVzatnhf_2YkKE4i15e-Iqv8q1F3aWQ",
     authDomain: "techpalettementor.firebaseapp.com",
     projectId: "techpalettementor",
@@ -37,7 +36,7 @@ const firebaseConfig = {
                             console.log("User signed in successfully!"); // Log to confirm the sign-in worked
                             const user = result.user; // Get the user object
                             console.log("User email:", user.email); // Debug log to check the email
-                            
+                           
                             verifyPaidUser(user.email); // Pass the email to the verifyPaidUser function
                         })
                         .catch((error) => {
@@ -49,30 +48,6 @@ const firebaseConfig = {
             }
         });
 
-
- // Email login event listener
-        document.addEventListener('DOMContentLoaded', function() {
-            const emailLoginButton = document.getElementById('email-login'); // Find the email login button
-
-            emailLoginButton.addEventListener('click', async () => {
-                const email = prompt("Enter your email:");
-                const password = prompt("Enter your password:");
-
-                if (email && password) {
-                    try {
-                        const userCredential = await signInWithEmailAndPassword(auth, email, password);
-                        console.log("User signed in successfully:", userCredential.user);
-                        verifyPaidUser(userCredential.user.email); // Call your existing function to check paid status
-                    } catch (error) {
-                        console.error("Error during email login:", error);
-                    }
-                } else {
-                    alert("Email and password are required.");
-                }
-            });
-        });
-
-	
         // Function to verify if the user has paid
         async function verifyPaidUser(email) {
             console.log("Verifying paid user:", email); // This shows your email is retrieved correctly
@@ -99,19 +74,6 @@ const firebaseConfig = {
                         console.log("Access granted, redirecting...");
                         document.getElementById('features').style.display = 'block'; // Ensure this element exists
                         // Optionally handle the flow of your application here
-
-    // Store the user's palette choice when they log in (example array)
-    const paletteArray = ['#FF5733', '#33FF57', '#3357FF']; // Replace with actual user's choice
-    localStorage.setItem('userPalette', JSON.stringify(paletteArray)); // Save user preferences
-
-    // Retrieve preferences on load
-    const storedPalette = JSON.parse(localStorage.getItem('userPalette'));
-    if (storedPalette) {
-        console.log("Retrieved user palette:", storedPalette); // Log the retrieved palette
-        // You can call a function to display this palette if you have one
-    }
-}
-			    
                     } else {
                         alert('Access denied. Please make sure you’ve paid.');
                     }
@@ -122,20 +84,16 @@ const firebaseConfig = {
                 console.error("Error in verifying paid user:", error);
             }
         }
-
-
-</script>
-
     </script>
 
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.apis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <title>Tech Palette Mentor</title>
 
-    <!--  tag (gtag.js) -->
-    <script async src="https://www.tagmanager.com/gtag/js?id=G-4YZ8N3B9R7"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4YZ8N3B9R7"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
@@ -320,7 +278,7 @@ const firebaseConfig = {
             color: black;
             text-decoration: none;
             margin: 0 10px;
-	    font-size: 10px;
+   font-size: 10px;
             transition: color 0.3s ease, font-weight 0.3s ease;
         }
         footer a:hover {
@@ -383,29 +341,28 @@ const firebaseConfig = {
             display: flex;
         }
 
-	    /* Styling for the login button */
-#google-login {
+   /* Styling for the login button */
+  #google-login {
     position: absolute;
     top: 20px; /* Adjust this value to change the vertical position */
-    left: 50%; /* Center it horizontally */
-    transform: translateX(-50%); /* Correct centering */
+    left: 25%; /* Adjust to position midway between the left and center */
+    transform: translateX(-50%);
     background-color: #C49380; /* Light pastel color */
     color: white;
     padding: 10px 20px;
-    font-size: 14px;
-    font-family: 'Poppins', sans-serif;
+    font-size: 14px; /* Slightly larger text for a cuter look */
+    font-family: 'Poppins', sans-serif; /* Font for a modern cute look */
     border: none;
-    border-radius: 20px; 
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    border-radius: 20px; /* Rounded corners for a cute look */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
     cursor: pointer;
     transition: all 0.3s ease;
-}
+  }
 
-#google-login:hover {
-    background-color: #A77B64; 
-    transform: scale(1.02); 
+ #google-login:hover {
+    background-color: #A77B64; /* Darken on hover for effect */
+    transform: scale(1.02); /* Slight zoom effect */
 }
-
 
     </style>
 </head>
@@ -416,9 +373,8 @@ const firebaseConfig = {
             <img id="logo" src="palettementor100x100transp.png" alt="Palette Mentor Logo">
         </a>
         <button id="google-login">Login with Google</button>
-<	button id="email-login">Login with Email</button>
 
-	    
+   
 
  <!-- Menu Icon -->
         <img id="menu-icon" src="menu.png" alt="Menu Icon">
@@ -433,7 +389,7 @@ const firebaseConfig = {
  <a href="ContactUs.html">Contact Us</a>
         </div>
 
-	    
+   
         <div id="features" style="display: none;"> <!-- Features container -->
             <canvas id="canvas"></canvas>
             <div id="controls">
@@ -480,7 +436,7 @@ const firebaseConfig = {
                 <div id="palette" style="display: none;"></div>
             </div>
         </div> <!-- End of features container -->
-	    
+   
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/tinycolor2@1.4.2/dist/tinycolor-min.js"></script>
