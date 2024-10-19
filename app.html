@@ -50,37 +50,35 @@ document.addEventListener('DOMContentLoaded', function() {
 // Function to verify if the user has paid
 async function verifyPaidUser(email) {
     console.log("Verifying paid user:", email); // This shows your email is retrieved correctly
-    try {
-        const payload = { email }; // Prepare the payload
-        console.log("Payload sent to server:", JSON.stringify(payload)); // Log the payload
-        
-        const response = await fetch('https://us-central1-techpalettementor.cloudfunctions.net/checkPaidUser', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(payload), // Make sure this is a valid JSON object
-        });
+  
+	
+try {
+    const response = await fetch('https://us-central1-techpalettementor.cloudfunctions.net/checkPaidUser', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: userEmail }), // Replace with the actual email variable
+    });
 
-        console.log("Response status:", response.status);
+    console.log("Response status:", response.status);
 
-        if (response.ok) {
-            const data = await response.json();
-            console.log("Response data:", data);
+    if (response.ok) {
+        const data = await response.json();
+        console.log("Response data:", data);
 
-            if (data.isPaidUser) {
-                console.log("Access granted, redirecting...");
-                document.getElementById('features').style.display = 'block'; // Ensure this element exists
-                window.location.href = 'https://mimoki1.github.io/TechPaletteMentor/app.html'; // You might want to handle this differently based on your app's flow
-            } else {
-                alert('Access denied. Please make sure you’ve paid.');
-            }
+        if (data.isPaidUser) {
+            console.log("Access granted, redirecting...");
+            document.getElementById('features').style.display = 'block'; // Ensure this element exists
+            // Optionally handle the flow of your application here
         } else {
-            console.error("Non-200 response received");
+            alert('Access denied. Please make sure you’ve paid.');
         }
-    } catch (error) {
-        console.error("Error in verifying paid user:", error);
+    } else {
+        console.error("Non-200 response received");
     }
+} catch (error) {
+    console.error("Error in verifying paid user:", error);
 }
 
 </script>
