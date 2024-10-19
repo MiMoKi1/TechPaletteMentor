@@ -24,20 +24,29 @@ const functions = getFunctions(app); // Initialize Functions
 
 // Google Sign-In
 document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('google-login').addEventListener('click', function() {
-        const provider = new GoogleAuthProvider();
-        
-        signInWithPopup(auth, provider)
-            .then((result) => {
-                const user = result.user; // Get the user object
-                verifyPaidUser(user.email); // Pass the email directly to the function
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-    });
-});
+    const loginButton = document.getElementById('google-login'); // Find the login button
 
+    if (loginButton) {
+        loginButton.addEventListener('click', function() {
+            console.log("Login button clicked!"); // Debug log to ensure the button is working
+            const provider = new GoogleAuthProvider();
+
+            signInWithPopup(auth, provider)
+                .then((result) => {
+                    console.log("User signed in successfully!"); // Log to confirm the sign-in worked
+                    const user = result.user; // Get the user object
+                    console.log("User email:", user.email); // Debug log to check the email
+                    
+                    verifyPaidUser(user.email); // Pass the email to the verifyPaidUser function
+                })
+                .catch((error) => {
+                    console.error("Error during sign-in:", error); // Log any sign-in errors
+                });
+        });
+    } else {
+        console.error("Login button not found!"); // Log if the button was not found in the DOM
+    }
+});
 // Function to verify if the user has paid
 async function verifyPaidUser(email) { // Accept email as an argument
    console.log("Verifying paid user:", email); // Debugging log to track the email being checked
