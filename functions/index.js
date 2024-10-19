@@ -5,7 +5,7 @@ const cors = require('cors')({ origin: 'https://mimoki1.github.io' }); // <-- Ad
 admin.initializeApp();
 
 exports.checkPaidUser = functions.https.onRequest((req, res) => {
-    cors({ origin: 'https://mimoki1.github.io' })(req, res, () => {
+    cors(req, res, () => { // Call cors without options here
         if (req.method !== 'POST') {
             console.log('Invalid method: ', req.method);
             return res.status(405).send('Method Not Allowed');
