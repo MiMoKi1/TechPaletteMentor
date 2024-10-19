@@ -57,6 +57,8 @@ async function verifyPaidUser(email) {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({ email }), // Make sure this is a valid JSON object
+		console.log(JSON.stringify({ email }));  // Log this to see the exact payload
+
         });
 
         console.log("Response status:", response.status);
