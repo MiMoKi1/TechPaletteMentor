@@ -17,74 +17,74 @@ const firebaseConfig = {
     measurementId: "G-1K1FRHPGEG"
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const functions = getFunctions(app); // Initialize Functions
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const functions = getFunctions(app); // Initialize Functions
 
-// Google Sign-In
-document.addEventListener('DOMContentLoaded', function() {
-    const loginButton = document.getElementById('google-login'); // Find the login button
+        // Google Sign-In
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginButton = document.getElementById('google-login'); // Find the login button
 
-    if (loginButton) {
-        loginButton.addEventListener('click', function() {
-            console.log("Login button clicked!"); // Debug log to ensure the button is working
-            const provider = new GoogleAuthProvider();
+            if (loginButton) {
+                loginButton.addEventListener('click', function() {
+                    console.log("Login button clicked!"); // Debug log to ensure the button is working
+                    const provider = new GoogleAuthProvider();
 
-            signInWithPopup(auth, provider)
-                .then((result) => {
-                    console.log("User signed in successfully!"); // Log to confirm the sign-in worked
-                    const user = result.user; // Get the user object
-                    console.log("User email:", user.email); // Debug log to check the email
-                    
-                    verifyPaidUser(user.email); // Pass the email to the verifyPaidUser function
-                })
-                .catch((error) => {
-                    console.error("Error during sign-in:", error); // Log any sign-in errors
+                    signInWithPopup(auth, provider)
+                        .then((result) => {
+                            console.log("User signed in successfully!"); // Log to confirm the sign-in worked
+                            const user = result.user; // Get the user object
+                            console.log("User email:", user.email); // Debug log to check the email
+                            
+                            verifyPaidUser(user.email); // Pass the email to the verifyPaidUser function
+                        })
+                        .catch((error) => {
+                            console.error("Error during sign-in:", error); // Log any sign-in errors
+                        });
                 });
-        });
-    } else {
-        console.error("Login button not found!"); // Log if the button was not found in the DOM
-    }
-});
-// Function to verify if the user has paid
-async function verifyPaidUser(email) {
-    console.log("Verifying paid user:", email); // This shows your email is retrieved correctly
-    try {
-        const payload = { email }; // Prepare the payload
-        console.log("Payload sent to server:", JSON.stringify(payload)); // Log the payload
-        
-   const response = await fetch('https://us-central1-techpalettementor.cloudfunctions.net/checkPaidUser', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(payload), // Make sure this is a valid JSON object
-        });
-
-        console.log("Response status:", response.status);
-
-        if (response.ok) {
-            const data = await response.json();
-            console.log("Response data:", data);
-
-            if (data.isPaidUser) {
-                console.log("Access granted, redirecting...");
-                document.getElementById('features').style.display = 'block'; // Ensure this element exists
-                window.location.href = 'https://mimoki1.github.io/TechPaletteMentor/app.html'; // You might want to handle this differently based on your app's flow
             } else {
-                alert('Access denied. Please make sure you’ve paid.');
+                console.error("Login button not found!"); // Log if the button was not found in the DOM
             }
-        } else {
-            console.error("Non-200 response received");
-        }
-    } catch (error) {
-        console.error("Error in verifying paid user:", error);
-    }
-}
+        });
 
-</script>
-</script>
+        // Function to verify if the user has paid
+        async function verifyPaidUser(email) {
+            console.log("Verifying paid user:", email); // This shows your email is retrieved correctly
+
+            try {
+                const payload = { email: email.toLowerCase() }; // Prepare the payload with the actual email variable
+                console.log("Payload sent to server:", JSON.stringify(payload)); // Log the payload
+
+                const response = await fetch('https://us-central1-techpalettementor.cloudfunctions.net/checkPaidUser', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(payload), // Make sure this is a valid JSON object
+                });
+
+                console.log("Response status:", response.status);
+
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log("Response data:", data);
+
+                    if (data.isPaidUser) {
+                        console.log("Access granted, redirecting...");
+                        document.getElementById('features').style.display = 'block'; // Ensure this element exists
+                        // Optionally handle the flow of your application here
+                    } else {
+                        alert('Access denied. Please make sure you’ve paid.');
+                    }
+                } else {
+                    console.error("Non-200 response received");
+                }
+            } catch (error) {
+                console.error("Error in verifying paid user:", error);
+            }
+        }
+    </script>
 
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <meta charset="UTF-8">
