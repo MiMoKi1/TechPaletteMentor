@@ -49,8 +49,9 @@
         /* Flex container for content and video */
         #content-video {
             display: flex;
-            justify-content: space-between;
+            flex-direction: row; /* Default to row */
             align-items: flex-start; /* Align items to the top */
+            justify-content: flex-start; /* Align to the left */
         }
 
         #content {
@@ -69,21 +70,9 @@
         }
 
         /* Purchase button styles */
-        form {
-            text-align: center;
-        }
-
-        button {
-            background-color: #8B5B29;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        button:hover {
-            background-color: #a86535;
+        #purchase {
+            margin-top: 20px; /* Space above the purchase section */
+            align-self: flex-start; /* Aligns the purchase button to the top */
         }
 
         /* Footer styles */
@@ -151,41 +140,24 @@
             visibility: visible;
             opacity: 1; /* Change opacity to make it visible */
         }
-/* Purchase button styles */
-form {
-    text-align: center;
-}
 
-button {
-    background-color: #FF6F61; /* Cute pink color */
-    color: white;
-    border: none;
-    border-radius: 12px; /* Rounded corners */
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-    position: relative;
-    overflow: hidden; /* To contain the pseudo-element */
-    transition: transform 0.3s;
-}
+        /* Media queries for responsiveness */
+        @media (max-width: 768px) {
+            #content-video {
+                flex-direction: column; /* Stack vertically on smaller screens */
+                align-items: center; /* Center items */
+            }
 
-button::before {
-    content: '❤️'; /* Heart symbol */
-    position: absolute;
-    left: 84px; /* Adjusted left position */
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 20px; /* Heart size */
-    opacity: 0.7; /* Slightly transparent */
-}
+            #content, #video {
+                width: 100%; /* Full width on smaller screens */
+                margin-right: 0; /* Reset margin */
+            }
 
-button:hover {
-    background-color: #FF4C4C; /* Darker pink on hover */
-    transform: scale(1.05); /* Slight scale on hover */
-}
-
-
+            #purchase {
+                width: 100%; /* Full width for purchase section */
+                text-align: center; /* Center align on smaller screens */
+            }
+        }
     </style>
 </head>
 <body>
@@ -198,40 +170,40 @@ button:hover {
     <img id="menu-icon" src="menu.png" alt="Menu Icon">
 </div>
 
-       <!-- Dropdown Menu -->
-        <div class="dropdown">
+<!-- Dropdown Menu -->
+<div class="dropdown">
     <a href="index.html">Home</a>
     <a href="AboutUs.html">About Us</a>
     <a href="HowToUse.html">How to Use</a>
     <a href="buynow.html">Buy</a>
     <a href="app.html">Web App</a>
- <a href="ContactUs.html">Contact Us</a>
-        </div>
+    <a href="ContactUs.html">Contact Us</a>
+</div>
 
 <header>
     <h1>Welcome to Tech Palette Mentor</h1>
 </header>
 
-
-<h2> About us </h2>
-Founded by artist  <a href="https://www.instagram/mmyking1">Michelle King</a>, Tech Palette Mentor, is an app founded at the interospection of art process and technology. King is passionate about bridging the gap between traditional art practices and modern technology. The Old Master copied the older master, how can we do that in 2024> This
-	question led to the coding in HTML, CSS, JAVA, SQL, noSQL, and hosting of frontend/backend files to brigh light to the answer.
-	This is an innovative web app designed specifically for artists of all levels. With Tech Palette Mentor, the aim is to empower creators by providing personalised colour blending suggestions based on their actual paint inventory. 
-	You're only using the Zorn palette, cool - select those 4 colours in the palette area, upload the picture you want to paint and click on the image to be told what colour to mix and at what
-	percentage to recreate that image. Drawing is a factor too, draw a grid on your canvas and click on our grid for your iamge and boom - copy thatpicture, block it out and get blending.
-	Less htinking, less logical thing, our code does that for you and more play, more experimentation!
-
-	<p>The mission here, is to inspire creativity, enhance artistic expression, and help artists explore the endless possibilities of colour theory. 
-	Tech Palette Mentor us on this exciting journey to elevate your artistry! </p>
+<h2>About Us</h2>
+<p>
+    Founded by artist, <a href="https://www.instagram/mmyking1">Michelle King</a>, Tech Palette Mentor, is an app founded at the interospection of art process and technology. King is passionate about bridging the gap between traditional art practices and modern technology. The Old Master copied the older master, how can we do that in 2024? This question led to the coding in HTML, CSS, JAVA, SQL, noSQL, and hosting of frontend/backend files to bring light to the answer. This is an innovative web app designed specifically for artists of all levels. With Tech Palette Mentor, the aim is to empower creators by providing personalized colour blending suggestions based on their actual paint inventory. 
+    You're only using the Zorn palette, cool - select those 4 colours in the palette area, upload the picture you want to paint and click on the image to be told what colour to mix and at what percentage to recreate that image. Drawing is a factor too, draw a grid on your canvas and click on our grid for your image and boom - copy that picture, block it out and get blending.
+    Less thinking, less logical thing, our code does that for you and more play, more experimentation!
+</p>
+<p>
+    The mission here is to inspire creativity, enhance artistic expression, and help artists explore the endless possibilities of colour theory. 
+    Tech Palette Mentor is on this exciting journey to elevate your artistry!
+</p>
 
 <section id="content-video">
     <div id="content">
         <h2>How to Use</h2>
-        <l>1. Upload your images
- 	<l>2. Input your paint inventory
-	<l>3. Get blending suggestions instantly!</l>
-
-<p>Learn how different colors interact and recreate images using your real-life paints.</p> 
+        <ul>
+            <li>1. Upload your images</li>
+            <li>2. Input your paint inventory</li>
+            <li>3. Get blending suggestions instantly!</li>
+        </ul>
+        <p>Learn how different colors interact and recreate images using your real-life paints.</p> 
     </div>
     <div id="video">
         <h2>Watch the Demo</h2>
@@ -243,19 +215,11 @@ Founded by artist  <a href="https://www.instagram/mmyking1">Michelle King</a>, T
 </section>
 
 <section id="purchase">
-
-	<script async
-  src="https://js.stripe.com/v3/buy-button.js">
-</script>
-
-<stripe-buy-button
-  buy-button-id="buy_btn_1QApqKIcCV1uZ856vlMNlS3k"
-  publishable-key="pk_live_51QAUaLIcCV1uZ856dNizRkc41p6GdHdxSpa91BcPfVLthFKC79e1zqyP169SsTkmQunQLCGeCFqZlIWYOeeFFcoA003NXZ8J1V"
->
-</stripe-buy-button>
-
-
-
+    <script async src="https://js.stripe.com/v3/buy-button.js"></script>
+    <stripe-buy-button
+        buy-button-id="buy_btn_1QApqKIcCV1uZ856vlMNlS3k"
+        publishable-key="pk_live_51QAUaLIcCV1uZ856dNizRkc41p6GdHdxSpa91BcPfVLthFKC79e1zqyP169SsTkmQunQLCGeCFqZlIWYOeeFFcoA003NXZ8J1V">
+    </stripe-buy-button>
 </section>
 
 <!-- Footer -->
